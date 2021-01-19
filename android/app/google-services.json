@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "486289706625",
+    "firebase_url": "https://clinicapp-v2.firebaseio.com",
+    "project_id": "clinicapp-v2",
+    "storage_bucket": "clinicapp-v2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486289706625:android:62f2ed7421c9c1b8d70780",
+        "android_client_info": {
+          "package_name": "com.pablodarre.clinic_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486289706625-icva6f3nqbvuvaa1l8tkrh4jn9club09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF2HrBam0M9qe_leWo4dPEkVBxgn47UVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486289706625-icva6f3nqbvuvaa1l8tkrh4jn9club09.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486289706625:android:3ac4d3d47a9f6d78d70780",
+        "android_client_info": {
+          "package_name": "com.pablodarre.clinic_riverpod"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486289706625-icva6f3nqbvuvaa1l8tkrh4jn9club09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF2HrBam0M9qe_leWo4dPEkVBxgn47UVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486289706625-icva6f3nqbvuvaa1l8tkrh4jn9club09.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
