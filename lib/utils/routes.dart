@@ -1,3 +1,5 @@
+import 'package:clinic_app/pages/medicine_detail_page/medicine_detail_page.dart';
+import 'package:clinic_app/pages/medicine_list_page/medicines_list_page.dart';
 import 'package:clinic_app/pages/patient_detail_page/patient_detail_page.dart';
 import 'package:clinic_app/pages/patient_list_page/patient_list_page.dart';
 
@@ -7,8 +9,8 @@ class MyRoutes {
     // '/homePage': (context) => HomePage(),
     '/patient-detail-page': (context) => PatientDetailPage(),
     '/full-patients-list-page': (context) => FullPatientsList(),
-    // '/medicines-list-page': (context) => MedicinesListPage(),
-    // '/medicine-detail-page': (context) => MedicineDetailPage(),
+    '/medicines-list-page': (context) => MedicinesListPage(),
+    '/medicine-detail-page': (context) => MedicineDetailPage(),
     // '/rooms-list-page': (context) => RoomsList(),
     // '/room-detail': (context) => RoomDetail(),
     // '/schedule-page': (context) => SchedulePage(),

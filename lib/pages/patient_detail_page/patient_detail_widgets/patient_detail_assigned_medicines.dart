@@ -1,6 +1,7 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:clinic_app/models/medicine_model.dart';
 import 'package:clinic_app/models/users_model.dart';
-import 'package:clinic_app/services/medicines_services.dart';
+import 'package:clinic_app/services/medicine_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 
@@ -13,9 +14,11 @@ class PatientAsignedMedicines extends ConsumerWidget {
         watch(getMedicineListStringByIdPatientIdFutureProvider(patient.userId));
 
     return list.when(
-      loading: () => const CircularProgressIndicator(),
+      loading: () => Container(
+        height: 150,
+        child: Center(child: const CircularProgressIndicator()),
+      ),
       error: (error, stack) => const Text('Oops'),
-      // data: (list) => Text(list.toString()),
       data: (list) => BuildAsignedMedicinesBody(list),
     );
   }
@@ -55,13 +58,13 @@ class BuildMedicinesAsignedToPatient extends StatelessWidget {
   Widget build(BuildContext context) {
     return medicinesList.length > 0
         ? Container(
-            height: 250,
+            height: 230,
             child: ListView.builder(
               itemCount: medicinesList.length,
               scrollDirection: Axis.horizontal,
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                return MedicineCard(medicinesList[index]);
+                return MedicineCard(medicinesList[index], index);
               },
             ),
           )
@@ -74,48 +77,57 @@ class BuildMedicinesAsignedToPatient extends StatelessWidget {
 
 class MedicineCard extends StatelessWidget {
   final Medicine medicine;
-  const MedicineCard(this.medicine);
+  final int delay;
+  const MedicineCard(this.medicine, this.delay);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: 15),
-      height: 230,
-      width: 170,
-      child: Card(
-        elevation: 0,
-        color: Colors.grey[100],
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 10),
-            Container(
-              height: 130,
-              child: Image.asset(
-                'assets/images/pill_bottle.png',
-              ),
+    return SlideInRight(
+      delay: Duration(milliseconds: delay * 60),
+      from: 20.0,
+      child: Container(
+        margin: EdgeInsets.only(left: 5),
+        height: 230,
+        width: 170,
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(8.0),
             ),
-            SizedBox(height: 10),
-            Container(
-              child: Text(
-                '${medicine.name}',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.blueGrey[800],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 10),
+              Container(
+                height: 130,
+                child: Image.asset(
+                  'assets/images/pill_bottle.png',
                 ),
               ),
-            ),
-            Container(
-              child: Text(
-                '${medicine.presentation}',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 10,
-                  color: Colors.blueGrey[600],
+              SizedBox(height: 10),
+              Container(
+                child: Text(
+                  '${medicine.name}',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Colors.blueGrey[800],
+                  ),
                 ),
               ),
-            ),
-          ],
+              Container(
+                child: Text(
+                  '${medicine.presentation}',
+                  style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    fontSize: 10,
+                    color: Colors.blueGrey[600],
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
