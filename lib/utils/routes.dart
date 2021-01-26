@@ -1,12 +1,12 @@
-import 'package:clinic_app/pages/home_page/home_page.dart';
-import 'package:clinic_app/pages/login_page/login_page.dart';
+import 'package:clinic_app/pages/patient_detail_page/patient_detail_page.dart';
+import 'package:clinic_app/pages/patient_list_page/patient_list_page.dart';
 
 class MyRoutes {
   static final routes = {
-    '/loginPage': (context) => LoginPage(),
-    '/homePage': (context) => HomePage(),
-    // '/patient-detail-page': (context) => PatientDetailPage(),
-    // '/full-patients-list-page': (context) => FullPatientsList(),
+    // '/loginPage': (context) => LoginPage(),
+    // '/homePage': (context) => HomePage(),
+    '/patient-detail-page': (context) => PatientDetailPage(),
+    '/full-patients-list-page': (context) => FullPatientsList(),
     // '/medicines-list-page': (context) => MedicinesListPage(),
     // '/medicine-detail-page': (context) => MedicineDetailPage(),
     // '/rooms-list-page': (context) => RoomsList(),

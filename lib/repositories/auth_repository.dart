@@ -1,0 +1,77 @@
+import 'package:clinic_app/models/users_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+abstract class AuthRepositoryInterfase {
+  Future<MyUser> signInWithEmailAndPassword(String email, String pass);
+  Future<MyUser> findUserByUid(String idUser);
+  Future<MyUser> findCurrentMyUser();
+  Future<void> logout();
+}
+
+class AuthRepository implements AuthRepositoryInterfase {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+  Stream<User> get authStateChanges => FirebaseAuth.instance.authStateChanges();
+
+  @override
+  Future<MyUser> signInWithEmailAndPassword(String email, String pass) async {
+    MyUser _user;
+    try {
+      await _auth
+          .signInWithEmailAndPassword(email: email, password: pass)
+          .then((userCredential) async {
+        _user = await findUserByUid(userCredential.user.uid);
+      });
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.code);
+    } catch (error) {
+      throw Exception(error);
+    }
+    return _user;
+  }
+
+  @override
+  Future<MyUser> findUserByUid(String idUser) async {
+    MyUser myUser;
+    try {
+      await users
+          .where('userId', isEqualTo: idUser)
+          .get()
+          .then((QuerySnapshot querySnapshot) => {
+                querySnapshot.docs.forEach((doc) {
+                  myUser = MyUser.fromJson(doc.data());
+                })
+              });
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.code);
+    } catch (error) {
+      throw Exception(error);
+    }
+    return myUser;
+  }
+
+  @override
+  Future<MyUser> findCurrentMyUser() async {
+    try {
+      var uid = FirebaseAuth.instance.currentUser.uid;
+      return findUserByUid(uid);
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.code);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  @override
+  Future<void> logout() async {
+    try {
+      await _auth.signOut();
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.code);
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+}

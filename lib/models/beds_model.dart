@@ -13,16 +13,16 @@ class Bed {
   String toRawJson() => json.encode(toJson());
 
   factory Bed.fromJson(Map<String, dynamic> json) => Bed(
-        available: json["available"],
+        available: json['available'],
         idBed: json['idBed'],
         idRoom: json['idRoom'],
         idPatient: json['idPatient'],
       );
 
   Map<String, dynamic> toJson() => {
-        "available": available,
-        "idBed": idBed,
-        "idRoom": idRoom,
-        "idPatient": idPatient,
+        'available': available,
+        'idBed': idBed,
+        'idRoom': idRoom,
+        'idPatient': idPatient,
       };
 }

@@ -34,6 +34,13 @@ dependencies:
   firebase_analytics: ^7.0.1
   firebase_core: ^0.7.0
   age: ^0.0.1
+  cross_connectivity: ^1.1.0
+  liquid_pull_to_refresh: ^2.0.0
+  day_night_switcher: ^0.1.1+1
+  date_format: ^1.0.8
+  font_awesome_flutter: ^8.10.0
+  animate_do: ^1.7.5
+  url_launcher: ^5.7.10
 
 dev_dependencies:
   flutter_test:
@@ -51,8 +58,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

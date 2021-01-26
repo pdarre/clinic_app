@@ -22,7 +22,7 @@ class Room {
   String toRawJson() => json.encode(toJson());
 
   factory Room.fromJson(Map<String, dynamic> json) => Room(
-        idRoom: json["idRoom"],
+        idRoom: json['idRoom'],
         occupancy: json['occupancy'],
         roomType: json['roomType'],
         bedCount: json['bedCount'],
@@ -31,11 +31,11 @@ class Room {
       );
 
   Map<String, dynamic> toJson() => {
-        "idRoom": idRoom,
-        "occupancy": occupancy,
-        "roomType": roomType,
-        "beds": beds,
-        "bedCount": bedCount,
-        "location": location,
+        'idRoom': idRoom,
+        'occupancy': occupancy,
+        'roomType': roomType,
+        'beds': beds,
+        'bedCount': bedCount,
+        'location': location,
       };
 }

@@ -35,6 +35,7 @@ class Appointment {
   String toRawJson() => json.encode(toJson());
 
   factory Appointment.fromJson(Map<String, dynamic> json) => Appointment(
+        // ignore: prefer_single_quotes
         idPatient: json["idPatient"],
         idDoctor: json['idDoctor'],
         specialty: json['specialty'],
@@ -53,17 +54,17 @@ class Appointment {
       );
 
   Map<String, dynamic> toJson() => {
-        "idPatient": idPatient,
-        "idDoctor": idDoctor,
-        "specialty": specialty,
-        "date": date,
-        "reason": reason,
-        "completed": completed,
-        "obs": obs,
-        "medicines": medicines,
-        "treatment": treatment,
-        "idAppointment": idAppointment,
-        "idDocument": idDocument,
-        "idBed": idBed,
+        'idPatient': idPatient,
+        'idDoctor': idDoctor,
+        'specialty': specialty,
+        'date': date,
+        'reason': reason,
+        'completed': completed,
+        'obs': obs,
+        'medicines': medicines,
+        'treatment': treatment,
+        'idAppointment': idAppointment,
+        'idDocument': idDocument,
+        'idBed': idBed,
       };
 }

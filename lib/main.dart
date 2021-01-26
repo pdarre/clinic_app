@@ -1,4 +1,6 @@
-import 'package:clinic_app/pages/selector_page/selector_page.dart';
+import 'package:clinic_app/pages/home_page/home_page.dart';
+import 'package:clinic_app/pages/login_page/login_page.dart';
+import 'package:clinic_app/providers.dart';
 import 'package:clinic_app/utils/routes.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
@@ -6,7 +8,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     ProviderScope(child: MyApp()),
   );
@@ -19,26 +23,27 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // theme: watch(myThemeDataProvider).myTheme,
+      theme: ThemeData(
+        primaryColor: Colors.blueGrey,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       navigatorObservers: [
         FirebaseAnalyticsObserver(analytics: analytics),
       ],
-      home: Scaffold(
-        body: FutureBuilder(
-          future: initFirebase(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return SelectorPage();
-            }
-            return Center(child: CircularProgressIndicator());
-          },
-        ),
-      ),
+      home: AuthenticationWrapper(),
       routes: MyRoutes.routes,
     );
   }
 }
 
-Future<void> initFirebase() async {
-  await Firebase.initializeApp();
+class AuthenticationWrapper extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, watch) {
+    final firebaseUser = watch(userAuthStream);
+    return firebaseUser.when(
+      loading: () => Center(child: CircularProgressIndicator()),
+      error: (error, stackTrace) => Center(child: Text(error.toString())),
+      data: (d) => d != null ? HomePage() : LoginPage(),
+    );
+  }
 }

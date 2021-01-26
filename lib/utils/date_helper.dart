@@ -4,12 +4,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class DateHelper {
   final day = DateTime.now().day;
 
-  getTodayDate() {
-    String ret = '${dayOfTheWeek()}, ${monthOfTheYear()} ${DateTime.now().day}';
+  String getTodayDate() {
+    var ret = '${dayOfTheWeek()}, ${monthOfTheYear()} ${DateTime.now().day}';
     return ret;
   }
 
-  dayOfTheWeek() {
+  String dayOfTheWeek() {
     switch (DateTime.now().weekday) {
       case 1:
         return 'Monday';
@@ -37,7 +37,7 @@ class DateHelper {
     }
   }
 
-  monthOfTheYear() {
+  String monthOfTheYear() {
     switch (DateTime.now().month) {
       case 1:
         return 'January';
@@ -81,8 +81,8 @@ class DateHelper {
   }
 
   String getAge(Timestamp ts) {
-    DateTime birthDate = ts.toDate();
-    DateTime today = DateTime.now();
+    var birthDate = ts.toDate();
+    var today = DateTime.now();
 
     AgeDuration age;
 

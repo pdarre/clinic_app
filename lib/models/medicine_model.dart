@@ -38,12 +38,12 @@ class Medicine {
       );
 
   Map<String, dynamic> toJson() => {
-        "description": description,
-        "idMedicine": idMedicine,
-        "imageUrl": imageUrl,
-        "indications": indications,
-        "name": name,
-        "presentation": presentation,
-        "stock": stock,
+        'description': description,
+        'idMedicine': idMedicine,
+        'imageUrl': imageUrl,
+        'indications': indications,
+        'name': name,
+        'presentation': presentation,
+        'stock': stock,
       };
 }
