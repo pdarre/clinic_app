@@ -23,7 +23,6 @@ class HomeBodyPage extends ConsumerWidget {
         await context.read(authProvider).findCurrentMyUser();
       },
       child: SingleChildScrollView(
-        // physics: BouncingScrollPhysics(),
         physics: AlwaysScrollableScrollPhysics(),
         child: Column(
           children: [

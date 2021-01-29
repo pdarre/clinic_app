@@ -47,32 +47,4 @@ class MedicineStateNotifierProvider extends StateNotifier<MedicineState> {
       state = MedicineError('${ex.toString()}');
     }
   }
-
-  // Future<void> getAllMedicines() async {
-  //   Medicine medicine;
-  //   List<String> medicineNameList = [];
-  //   try {
-  //     state = MedicineLoading();
-  //     await _medicineRepository.getAllMedicines().then((medicineList) =>
-  //         state = MedicineLoaded(medicine, medicineList, medicineNameList));
-  //   } on FirebaseException catch (e) {
-  //     state = MedicineError('${e.message}');
-  //   } catch (ex) {
-  //     state = MedicineError('${ex.toString()}');
-  //   }
-  // }
-
-  // Future<void> getMedicineListByIdPatient(String idPatient) async {
-  //   Medicine medicine;
-  //   List<Medicine> medicines = [];
-  //   try {
-  //     await _medicineRepository.getMedicineListByIdPatient(idPatient).then(
-  //         (medicineNameList) =>
-  //             state = MedicineLoaded(medicine, medicines, medicineNameList));
-  //   } on FirebaseException catch (e) {
-  //     state = MedicineError('${e.message}');
-  //   } catch (ex) {
-  //     state = MedicineError('${ex.toString()}');
-  //   }
-  // }
 }

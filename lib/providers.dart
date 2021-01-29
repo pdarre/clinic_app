@@ -7,8 +7,10 @@ import 'package:clinic_app/providers/patient_provider.dart';
 import 'package:clinic_app/providers/stream_appointments.dart';
 import 'package:clinic_app/repositories/appointment_repository.dart';
 import 'package:clinic_app/repositories/auth_repository.dart';
+import 'package:clinic_app/repositories/bed_repository.dart';
 import 'package:clinic_app/repositories/medicine_repository.dart';
 import 'package:clinic_app/repositories/patient_repository.dart';
+import 'package:clinic_app/repositories/room_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,6 +25,10 @@ final patientRepository =
 
 final medicineRepository =
     Provider<MedicineRepository>((ref) => MedicineRepository());
+
+final roomRepository = Provider<RoomRepository>((ref) => RoomRepository());
+
+final bedRepository = Provider<BedRepository>((ref) => BedRepository());
 
 //provide acces to StreamAppointments class
 final streamAppointments = Provider<StreamAppointments>(

@@ -1,6 +1,7 @@
 import 'package:clinic_app/models/appointments_model.dart';
 import 'package:clinic_app/models/medicine_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
 
 abstract class MedicineRepositoryInterfase {
   Future<Medicine> getMedicineByIdMedicine(String idMedicine);
@@ -78,5 +79,20 @@ class MedicineRepository implements MedicineRepositoryInterfase {
       print(ex.toString());
     }
     return [];
+  }
+
+  Future<List<MultiSelectItem<dynamic>>> medicinesSelectedItemsList() async {
+    List<MultiSelectItem<dynamic>> itemsList = [];
+    try {
+      List<Medicine> medicines = await getAllMedicines();
+      for (var item in medicines) {
+        itemsList.add(MultiSelectItem('${item.idMedicine}', '${item.name}'));
+      }
+    } on FirebaseException catch (e) {
+      print(e.message);
+    } catch (ex) {
+      print(ex.toString());
+    }
+    return itemsList;
   }
 }

@@ -30,7 +30,7 @@ class HomeAppointmentCard extends ConsumerWidget {
               ),
               child: FutureBuilder<MyUser>(
                 future:
-                    watch(authRepository).findUserByUid(appointment.idPatient),
+                    watch(authRepository).findUserById(appointment.idPatient),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     final temp = snapshot.data;

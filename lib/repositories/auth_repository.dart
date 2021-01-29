@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthRepositoryInterfase {
   Future<MyUser> signInWithEmailAndPassword(String email, String pass);
-  Future<MyUser> findUserByUid(String idUser);
+  Future<MyUser> findUserById(String idUser);
   Future<MyUser> findCurrentMyUser();
   Future<void> logout();
 }
@@ -22,7 +22,7 @@ class AuthRepository implements AuthRepositoryInterfase {
       await _auth
           .signInWithEmailAndPassword(email: email, password: pass)
           .then((userCredential) async {
-        _user = await findUserByUid(userCredential.user.uid);
+        _user = await findUserById(userCredential.user.uid);
       });
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code);
@@ -33,7 +33,7 @@ class AuthRepository implements AuthRepositoryInterfase {
   }
 
   @override
-  Future<MyUser> findUserByUid(String idUser) async {
+  Future<MyUser> findUserById(String idUser) async {
     MyUser myUser;
     try {
       await users
@@ -56,7 +56,7 @@ class AuthRepository implements AuthRepositoryInterfase {
   Future<MyUser> findCurrentMyUser() async {
     try {
       var uid = FirebaseAuth.instance.currentUser.uid;
-      return findUserByUid(uid);
+      return findUserById(uid);
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code);
     } catch (error) {
