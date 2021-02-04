@@ -331,11 +331,12 @@ class AppointmentDetailBody extends ConsumerWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           appointment.completed = false;
+                          appointment.medicines = [];
                           context
                               .read(appointmentsProvider)
                               .updateAppointment(appointment);
                         },
-                        child: Text('Retore'),
+                        child: Text('Reset appointment'),
                       ),
                     ),
                   ],

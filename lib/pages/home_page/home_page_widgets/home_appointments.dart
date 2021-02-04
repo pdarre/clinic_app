@@ -8,8 +8,7 @@ import 'package:flutter_riverpod/all.dart';
 
 class HomeAppointments extends ConsumerWidget {
   final MyUser doctor;
-  HomeAppointments({this.doctor});
-
+  const HomeAppointments({this.doctor});
   @override
   Widget build(BuildContext context, watch) {
     final appointmentsList = watch(appointmentsStream.stream);

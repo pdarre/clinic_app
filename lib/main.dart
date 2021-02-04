@@ -1,6 +1,7 @@
 import 'package:clinic_app/pages/home_page/home_page.dart';
 import 'package:clinic_app/pages/login_page/login_page.dart';
 import 'package:clinic_app/providers.dart';
+import 'package:clinic_app/providers/themes_provider.dart';
 import 'package:clinic_app/utils/routes.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
@@ -20,18 +21,64 @@ FirebaseAnalytics analytics = FirebaseAnalytics();
 
 class MyApp extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, watch) {
+    final isDarkFromPreferences = watch(retrieveThemeFromPreferences);
+    context.read(themeProvider).getThemeFromPreferences();
+    return isDarkFromPreferences.when(
+      error: (error, stack) => BuildInitialError(error),
+      loading: () => BuildInitialLoading(),
+      data: (val) => BuildInitialPage(val),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class BuildInitialPage extends StatelessWidget {
+  bool isDark;
+  BuildInitialPage(this.isDark);
+  @override
+  Widget build(BuildContext context) {
+    return Consumer(
+      builder: (_, watch, __) {
+        isDark = watch(themeProvider).darkTheme;
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: isDark ? ThemeData.dark() : ThemeData.light(),
+          navigatorObservers: [
+            FirebaseAnalyticsObserver(analytics: analytics),
+          ],
+          home: AuthenticationWrapper(),
+          routes: MyRoutes.routes,
+        );
+      },
+    );
+  }
+}
+
+class BuildInitialLoading extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.blueGrey,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+      home: Scaffold(
+        body: Center(
+          child: Text('Loading'),
+        ),
       ),
-      navigatorObservers: [
-        FirebaseAnalyticsObserver(analytics: analytics),
-      ],
-      home: AuthenticationWrapper(),
-      routes: MyRoutes.routes,
+    );
+  }
+}
+
+class BuildInitialError extends StatelessWidget {
+  final String error;
+  const BuildInitialError(this.error);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Text('$error'),
+        ),
+      ),
     );
   }
 }
@@ -41,9 +88,10 @@ class AuthenticationWrapper extends ConsumerWidget {
   Widget build(BuildContext context, watch) {
     final firebaseUser = watch(userAuthStream);
     return firebaseUser.when(
-      loading: () => Center(child: CircularProgressIndicator()),
-      error: (error, stackTrace) => Center(child: Text(error.toString())),
-      data: (d) => d != null ? HomePage() : LoginPage(),
+      loading: () => Scaffold(body: Center(child: CircularProgressIndicator())),
+      error: (error, stackTrace) =>
+          Scaffold(body: Center(child: Text(error.toString()))),
+      data: (user) => user != null ? HomePage() : LoginPage(),
     );
   }
 }

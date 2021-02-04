@@ -8,3 +8,8 @@ final getAppointmentByIdFutureProvider = FutureProvider.autoDispose
       .watch(appointmentRepository)
       .getAppointmentById(idAppointment);
 });
+
+final getEvents = FutureProvider.autoDispose
+    .family<Map<DateTime, List<Appointment>>, String>((ref, idDoctor) async {
+  return ref.watch(appointmentRepository).getEvents(idDoctor);
+});

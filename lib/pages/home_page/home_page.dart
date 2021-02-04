@@ -5,6 +5,7 @@ import 'package:clinic_app/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 import 'package:cross_connectivity/cross_connectivity.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class HomePage extends ConsumerWidget {
   @override
@@ -25,7 +26,16 @@ class HomePage extends ConsumerWidget {
                 drawer: NavigationDrawer(
                   myUser: myUser,
                 ),
-                body: HomeBodyPage(myUser: myUser),
+                body: LiquidPullToRefresh(
+                  showChildOpacityTransition: false,
+                  borderWidth: 1.0,
+                  springAnimationDurationInMilliseconds: 500,
+                  animSpeedFactor: 1.5,
+                  height: 80,
+                  color: Colors.blueGrey,
+                  onRefresh: () => context.refresh(getFutureMyUser),
+                  child: HomeBodyPage(myUser: myUser),
+                ),
               );
             },
           );

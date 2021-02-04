@@ -11,72 +11,58 @@ class NavigationDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       elevation: 5,
-      child: Container(
-        padding: const EdgeInsets.only(left: 16.0, right: 40),
-        width: 300,
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            CreateDrawerHeader(myUser),
-            createDrawerBodyItem(
-                icon: Icons.people_outlined,
-                text: 'My patients',
-                onTap: () {
-                  Navigator.of(context)
-                      .popAndPushNamed('/full-patients-list-page');
-                }),
-            createDrawerBodyItem(
-                icon: Icons.medical_services_outlined,
-                text: 'Available medicines',
-                onTap: () {
-                  Navigator.of(context).popAndPushNamed('/medicines-list-page');
-                }),
-            createDrawerBodyItem(
-                icon: Icons.room_preferences_outlined,
-                text: 'Rooms detail',
-                onTap: () {
-                  Navigator.of(context).popAndPushNamed('/rooms-list-page');
-                }),
-            createDrawerBodyItem(
-                icon: Icons.schedule_outlined,
-                text: 'My schedule',
-                onTap: () {
-                  Navigator.of(context).popAndPushNamed('/schedule-page');
-                }),
-            const Divider(),
-            createDrawerBodyItem(
-                icon: Icons.login_outlined,
-                text: 'Sign Out',
-                onTap: () {
-                  context.read(authProvider).logout();
-                }),
-            const Divider(),
-            ListTile(
-              title: const Text('App version 1.0.0'),
-              onTap: () {
-                _showDialog(context);
-              },
-            ),
-            const Divider(),
-            ListTile(
-              leading: Consumer(
-                builder: (_, watch, __) {
-                  return DayNightSwitcher(
-                    // isDarkModeEnabled: watch(myThemeDataProvider).myThemeState,
-                    isDarkModeEnabled: false,
-                    onStateChanged: (isDarkModeEnabled) {
-                      // context
-                      //     .read(myThemeDataProvider)
-                      //     .changeMyTheme(isDarkModeEnabled);
-                      isDarkModeEnabled = !isDarkModeEnabled;
-                    },
-                  );
+      child: Column(
+        children: [
+          CreateDrawerHeader(myUser),
+          CreateDrawerBodyItems(),
+        ],
+      ),
+    );
+  }
+}
+
+class CreateDrawerBodyItems extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        DrawerBodyItem(Icons.people_outlined, 'My patients', () {
+          Navigator.of(context).popAndPushNamed('/full-patients-list-page');
+        }),
+        DrawerBodyItem(Icons.medical_services_outlined, 'Available medicines',
+            () {
+          Navigator.of(context).popAndPushNamed('/medicines-list-page');
+        }),
+        DrawerBodyItem(Icons.room_preferences_outlined, 'Rooms detail', () {
+          Navigator.of(context).popAndPushNamed('/rooms-list-page');
+        }),
+        DrawerBodyItem(Icons.schedule_outlined, 'My schedule', () {
+          Navigator.of(context).popAndPushNamed('/schedule-page');
+        }),
+        const Divider(),
+        DrawerBodyItem(Icons.login_outlined, 'Sign Out', () {
+          context.read(authProvider).logout();
+        }),
+        ListTile(
+          title: const Text('App version 1.0.0'),
+          onTap: () {
+            _showDialog(context);
+          },
+        ),
+        const Divider(),
+        Consumer(
+          builder: (_, watch, __) {
+            return ListTile(
+              leading: DayNightSwitcher(
+                isDarkModeEnabled: watch(themeProvider).darkTheme,
+                onStateChanged: (val) {
+                  context.read(themeProvider).setDarkTheme(val);
                 },
               ),
-            ),
-          ],
+            );
+          },
         ),
-      ),
+      ],
     );
   }
 }
@@ -127,20 +113,26 @@ Widget checkPhoto(MyUser myUser) {
   return Container();
 }
 
-Widget createDrawerBodyItem(
-    {IconData icon, String text, GestureTapCallback onTap}) {
-  return ListTile(
-    title: Row(
-      children: <Widget>[
-        Icon(icon),
-        Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Text(text),
-        )
-      ],
-    ),
-    onTap: onTap,
-  );
+class DrawerBodyItem extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  final GestureTapCallback onTap;
+  const DrawerBodyItem(this.icon, this.text, this.onTap);
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Row(
+        children: <Widget>[
+          Icon(icon),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(text),
+          )
+        ],
+      ),
+      onTap: onTap,
+    );
+  }
 }
 
 Future _showDialog(BuildContext context) {

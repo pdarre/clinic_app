@@ -17,7 +17,7 @@ class MyRoutes {
     '/medicine-detail-page': (context) => MedicineDetailPage(),
     '/rooms-list-page': (context) => RoomsListPage(),
     '/room-detail': (context) => RoomDetailPage(),
-    // '/schedule-page': (context) => SchedulePage(),
+    '/schedule-page': (context) => SchedulePage(),
     '/appointment-detail': (context) => AppointmentDetail(),
     // // '/service-add-user': (context) => ServiceAddUser(),
     // '/video-chat-page': (context) => VideoChatPage(),

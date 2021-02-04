@@ -5,6 +5,7 @@ import 'package:clinic_app/providers/auth_provider.dart';
 import 'package:clinic_app/providers/medicine_provider.dart';
 import 'package:clinic_app/providers/patient_provider.dart';
 import 'package:clinic_app/providers/stream_appointments.dart';
+import 'package:clinic_app/providers/themes_provider.dart';
 import 'package:clinic_app/repositories/appointment_repository.dart';
 import 'package:clinic_app/repositories/auth_repository.dart';
 import 'package:clinic_app/repositories/bed_repository.dart';
@@ -30,10 +31,14 @@ final roomRepository = Provider<RoomRepository>((ref) => RoomRepository());
 
 final bedRepository = Provider<BedRepository>((ref) => BedRepository());
 
-//provide acces to StreamAppointments class
 final streamAppointments = Provider<StreamAppointments>(
   (ref) => StreamAppointments(),
 );
+
+final appointmentsStream = StreamProvider.autoDispose<QuerySnapshot>((ref) {
+  var uid = FirebaseAuth.instance.currentUser.uid;
+  return ref.watch(streamAppointments).getAppointments(uid);
+});
 
 final authProvider = StateNotifierProvider(
     (ref) => AuthStateNotifierProvider(ref.watch(authRepository)));
@@ -50,13 +55,10 @@ final patientProvider = StateNotifierProvider.autoDispose(
 final medicineProvider = StateNotifierProvider(
     (ref) => MedicineStateNotifierProvider(ref.watch(medicineRepository)));
 
+final themeProvider = ChangeNotifierProvider((ref) => ThemesProvider());
+
 final userAuthStream = StreamProvider<User>((ref) {
   return ref.watch(authRepository).authStateChanges;
-});
-
-final appointmentsStream = StreamProvider.autoDispose<QuerySnapshot>((ref) {
-  var uid = FirebaseAuth.instance.currentUser.uid;
-  return ref.watch(streamAppointments).getAppointments(uid);
 });
 
 final getFutureMyUser = FutureProvider.autoDispose<MyUser>((ref) async {

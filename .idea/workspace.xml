@@ -4,16 +4,21 @@
     <list default="true" id="911dceec-d8e1-4e1f-b897-11d78c335d66" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/clinic_app_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/clinic_app_android.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/recetas_model.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/appointment_detail_page/appointment_detail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/appointment_detail_page/appointment_detail.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/home_page/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home_page/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/login_page/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/login_page/login_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/selector_page/selector_page.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_appointments.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_appointments.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_body_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_body_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_drawer_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_drawer_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/patient_detail_page/patient_detail_widgets/patient_detail_assigned_medicines.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/patient_detail_page/patient_detail_widgets/patient_detail_assigned_medicines.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/patient_list_page/patient_list_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/patient_list_page/patient_list_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/providers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/providers.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/providers/stream_appointments.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/repositories/appointment_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/repositories/appointment_repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/services/appointment_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/services/appointment_services.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/utils/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/routes.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
@@ -52,10 +57,14 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="100" y="100" width="1629" height="789" key="AVDManager" timestamp="1611324751546">
+    <state x="595" y="231" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1612451164768">
       <screen x="0" y="0" width="1829" height="989" />
     </state>
-    <state x="100" y="100" width="1629" height="789" key="AVDManager/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1611324751546" />
+    <state x="595" y="231" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1612451164768" />
+    <state x="100" y="100" width="1629" height="789" key="AVDManager" timestamp="1612451647624">
+      <screen x="0" y="0" width="1829" height="989" />
+    </state>
+    <state x="100" y="100" width="1629" height="789" key="AVDManager/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1612451647624" />
     <state width="1771" height="377" key="GridCell.Tab.0.bottom" timestamp="1611324069044">
       <screen x="0" y="0" width="1829" height="989" />
     </state>
@@ -72,5 +81,9 @@
       <screen x="0" y="0" width="1829" height="989" />
     </state>
     <state width="1771" height="377" key="GridCell.Tab.0.right/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1611324069044" />
+    <state x="424" y="140" key="SettingsEditor" timestamp="1612451158384">
+      <screen x="0" y="0" width="1829" height="989" />
+    </state>
+    <state x="424" y="140" key="SettingsEditor/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1612451158384" />
   </component>
 </project>

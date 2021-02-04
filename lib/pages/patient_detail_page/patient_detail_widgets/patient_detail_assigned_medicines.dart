@@ -81,9 +81,9 @@ class MedicineCard extends StatelessWidget {
   const MedicineCard(this.medicine, this.delay);
   @override
   Widget build(BuildContext context) {
-    return SlideInRight(
-      delay: Duration(milliseconds: delay * 60),
-      from: 20.0,
+    return BounceInUp(
+      delay: Duration(milliseconds: delay * 200),
+      from: 30.0,
       child: Container(
         margin: EdgeInsets.only(left: 5),
         height: 230,

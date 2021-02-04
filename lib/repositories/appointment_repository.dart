@@ -147,7 +147,6 @@ class AppointmentRepository implements AppointmentRepositoryInterfase {
   Future<void> updateAppointment(Appointment appointment) async {
     var appointments = FirebaseFirestore.instance.collection('appointments');
     try {
-      // appointment.completed = true;
       await appointments
           .doc('${appointment.idDocument}')
           .update(appointment.toJson());
