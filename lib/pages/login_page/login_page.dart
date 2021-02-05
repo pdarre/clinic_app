@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:clinic_app/providers.dart';
 import 'package:clinic_app/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
@@ -22,18 +24,15 @@ class LoginPage extends StatelessWidget {
               return Consumer(
                 builder: (context, watch, child) {
                   final state = watch(authProvider.state);
-                  if (state is AuthInitial) {
-                    return LoginBody();
+                  if (state is AuthError) {
+                    return LoginError(state.message);
                   } else if (state is AuthLoading) {
-                    return Center(child: CircularProgressIndicator());
+                    return LoadingBody();
                   } else if (state is AuthLoaded) {
                     return LoginBody();
-                  } else if (state is AuthError) {
-                    return Center(
-                      child: Text(state.message),
-                    );
+                  } else {
+                    return LoginBody();
                   }
-                  return null;
                 },
               );
             } else {
@@ -57,7 +56,64 @@ class LoginPage extends StatelessWidget {
   }
 }
 
+class LoginError extends StatelessWidget {
+  final String error;
+  const LoginError(this.error);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Ups, something went wrong'),
+            Text('$error'),
+            RaisedButton(
+              child: Text('Go back'),
+              onPressed: () {
+                return LoginBody();
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class LoginBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        LoginBackground(),
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              LoginHeader(),
+              RaisedButton(
+                child: Text('Kevin SignIn'),
+                onPressed: () {
+                  myLogin(context, 'kevindawson@mail.com', '123456');
+                },
+              ),
+              SizedBox(height: 20),
+              RaisedButton(
+                child: Text('Mota SignIn'),
+                onPressed: () {
+                  myLogin(context, 'waltergargano@mail.com', '123456');
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class LoginBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -80,38 +136,49 @@ class LoginBody extends StatelessWidget {
             height: 500,
           ),
         ),
-        Center(
-          child: Column(
+      ],
+    );
+  }
+}
+
+class LoginHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Text(
+            'Clinic App',
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blueGrey[700],
+            ),
+          ),
+          Container(
+            height: 200,
+            child: Image.asset('assets/images/logo.png'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class LoadingBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          LoginBackground(),
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Clinic App',
-                style: TextStyle(
-                  fontSize: 40,
-                  color: Colors.blueGrey[700],
-                ),
-              ),
-              Container(
-                height: 200,
-                child: Image.asset('assets/images/logo.png'),
-              ),
-              RaisedButton(
-                child: Text('Kevin SignIn'),
-                onPressed: () {
-                  myLogin(context, 'kevindawson@mail.com', '123456');
-                },
-              ),
-              SizedBox(height: 20),
-              RaisedButton(
-                child: Text('Mota SignIn'),
-                onPressed: () {
-                  myLogin(context, 'waltergargano@mail.com', '123456');
-                },
-              ),
+              Center(child: CircularProgressIndicator()),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

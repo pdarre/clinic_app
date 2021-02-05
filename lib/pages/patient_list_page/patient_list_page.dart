@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:clinic_app/models/users_model.dart';
 import 'package:clinic_app/services/patient_services.dart';
 import 'package:flutter/material.dart';
@@ -60,11 +61,16 @@ class BuildPatientsListData extends StatelessWidget {
         onRefresh: () async {
           await context.refresh(getAllPatientsFutureProvider);
         },
-        child: CustomScrollView(
-          physics: BouncingScrollPhysics(),
-          slivers: [
-            BuildSliverAppBar(),
-            BuildSliverPatientsList(patientsList),
+        child: Stack(
+          children: [
+            PatientListBackgroud(),
+            CustomScrollView(
+              physics: BouncingScrollPhysics(),
+              slivers: [
+                BuildSliverAppBar(),
+                BuildSliverPatientsList(patientsList),
+              ],
+            ),
           ],
         ),
       ),
@@ -89,21 +95,28 @@ class BuildSliverPatientsList extends StatelessWidget {
                     Navigator.of(context).pushNamed('/patient-detail-page',
                         arguments: patients[index]);
                   },
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      maxRadius: 30,
-                      minRadius: 30,
-                      backgroundColor: Colors.blueGrey[300],
-                      child: CircleAvatar(
-                        maxRadius: 28,
-                        minRadius: 28,
-                        backgroundImage: NetworkImage(patients[index].photo),
+                  child: FadeInRight(
+                    duration: Duration(milliseconds: 80 * index),
+                    child: ListTile(
+                      leading: Hero(
+                        tag: patients[index].userId,
+                        child: CircleAvatar(
+                          maxRadius: 30,
+                          minRadius: 30,
+                          backgroundColor: Colors.blueGrey[300],
+                          child: CircleAvatar(
+                            maxRadius: 28,
+                            minRadius: 28,
+                            backgroundImage:
+                                NetworkImage(patients[index].photo),
+                          ),
+                        ),
                       ),
+                      title: Text(
+                          '${patients[index].firstName} ${patients[index].lastName}'),
+                      subtitle: Text('${patients[index].email}'),
+                      trailing: Icon(Icons.chevron_right),
                     ),
-                    title: Text(
-                        '${patients[index].firstName} ${patients[index].lastName}'),
-                    subtitle: Text('${patients[index].email}'),
-                    trailing: Icon(Icons.chevron_right),
                   ),
                 ),
                 Divider(indent: 20, endIndent: 20, thickness: 1),
@@ -124,17 +137,21 @@ class BuildSliverAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       leading: IconButton(
-          icon: Icon(FontAwesomeIcons.chevronCircleLeft,
-              size: 25, color: Colors.blueGrey[500]),
+          icon: Icon(
+            FontAwesomeIcons.chevronCircleLeft,
+            size: 25,
+            color: Colors.blueGrey[500],
+          ),
           onPressed: () => Navigator.of(context).pop()),
       title: Text(
         'My patients',
-        style: TextStyle(color: Colors.blueGrey[800]),
+        style: TextStyle(color: Colors.blueGrey[900]),
       ),
-      backgroundColor: Colors.blueGrey[200],
+      backgroundColor: Colors.white,
       elevation: 2,
+      centerTitle: true,
       automaticallyImplyLeading: false,
-      expandedHeight: 170.0,
+      expandedHeight: 120.0,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
         background: Stack(
@@ -148,7 +165,7 @@ class BuildSliverAppBar extends StatelessWidget {
                     child: Image.asset(
                       'assets/images/logo.png',
                       fit: BoxFit.cover,
-                      color: Colors.blueGrey[400],
+                      color: Colors.blueGrey[300],
                     ))),
             Positioned(
                 top: -20,
@@ -159,7 +176,7 @@ class BuildSliverAppBar extends StatelessWidget {
                     child: Image.asset(
                       'assets/images/logo.png',
                       fit: BoxFit.cover,
-                      color: Colors.blueGrey[300],
+                      color: Colors.blueGrey[100],
                     ))),
           ],
         ),
@@ -199,15 +216,6 @@ class PatientListBackgroud extends StatelessWidget {
         Positioned(
           left: -200,
           bottom: -200,
-          child: Image.asset(
-            'assets/images/logo.png',
-            color: Colors.black12,
-            height: 500,
-          ),
-        ),
-        Positioned(
-          right: -200,
-          top: -200,
           child: Image.asset(
             'assets/images/logo.png',
             color: Colors.black12,

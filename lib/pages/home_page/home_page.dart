@@ -9,14 +9,13 @@ import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class HomePage extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, watch) {
     final myUser = watch(getFutureMyUser);
     return ConnectivityBuilder(
       builder: (context, isConnected, status) {
         if (isConnected != null && isConnected) {
           return myUser.when(
-            loading: () => const Scaffold(
-                body: Center(child: CircularProgressIndicator())),
+            loading: () => HomeLoadingBackground(),
             error: (err, stack) => Center(
                 child: Text(
                     'Error, try reloading the screen throught pulling down: $err')),
@@ -54,6 +53,44 @@ class HomePage extends ConsumerWidget {
           );
         }
       },
+    );
+  }
+}
+
+class HomeLoadingBackground extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          Positioned(
+            left: -200,
+            bottom: -200,
+            child: Image.asset(
+              'assets/images/logo.png',
+              color: Colors.black12,
+              height: 500,
+            ),
+          ),
+          Positioned(
+            right: -200,
+            top: -200,
+            child: Image.asset(
+              'assets/images/logo.png',
+              color: Colors.black12,
+              height: 500,
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                  child: Text('Loading Home Page',
+                      style: TextStyle(fontSize: 16))),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

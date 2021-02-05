@@ -41,16 +41,13 @@ class HomeAppointmentCard extends ConsumerWidget {
                         children: [
                           Row(
                             children: [
-                              Hero(
-                                tag: appointment.idPatient,
+                              CircleAvatar(
+                                maxRadius: 27,
+                                backgroundColor: Colors.blueGrey[300],
                                 child: CircleAvatar(
-                                  maxRadius: 27,
-                                  backgroundColor: Colors.blueGrey[300],
-                                  child: CircleAvatar(
-                                    maxRadius: 25,
-                                    backgroundImage:
-                                        NetworkImage('${snapshot.data.photo}'),
-                                  ),
+                                  maxRadius: 25,
+                                  backgroundImage:
+                                      NetworkImage('${snapshot.data.photo}'),
                                 ),
                               ),
                             ],

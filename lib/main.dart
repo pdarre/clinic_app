@@ -25,8 +25,8 @@ class MyApp extends ConsumerWidget {
     final isDarkFromPreferences = watch(retrieveThemeFromPreferences);
     context.read(themeProvider).getThemeFromPreferences();
     return isDarkFromPreferences.when(
-      error: (error, stack) => BuildInitialError(error),
       loading: () => BuildInitialLoading(),
+      error: (error, stack) => BuildInitialError(error),
       data: (val) => BuildInitialPage(val),
     );
   }

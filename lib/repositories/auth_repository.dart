@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthRepositoryInterfase {
-  Future<MyUser> signInWithEmailAndPassword(String email, String pass);
+  Future<void> signInWithEmailAndPassword(String email, String pass);
   Future<MyUser> findUserById(String idUser);
   Future<MyUser> findCurrentMyUser();
   Future<void> logout();
@@ -16,20 +16,14 @@ class AuthRepository implements AuthRepositoryInterfase {
   Stream<User> get authStateChanges => FirebaseAuth.instance.authStateChanges();
 
   @override
-  Future<MyUser> signInWithEmailAndPassword(String email, String pass) async {
-    MyUser _user;
+  Future<void> signInWithEmailAndPassword(String email, String pass) async {
     try {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: pass)
-          .then((userCredential) async {
-        _user = await findUserById(userCredential.user.uid);
-      });
+      await _auth.signInWithEmailAndPassword(email: email, password: pass);
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code);
     } catch (error) {
       throw Exception(error);
     }
-    return _user;
   }
 
   @override

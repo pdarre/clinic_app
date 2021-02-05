@@ -44,6 +44,7 @@ dependencies:
   table_calendar: ^2.3.3
   multi_select_flutter: ^3.1.2
   shared_preferences: ^0.5.12+4
+  flutter_native_splash: ^0.2.9
 
 dev_dependencies:
   flutter_test:

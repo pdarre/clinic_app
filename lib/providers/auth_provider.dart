@@ -21,17 +21,11 @@ class AuthError extends AuthState {
   const AuthError(this.message);
 }
 
-class AuthLoaded extends AuthState {
-  final MyUser myUser;
-  AuthLoaded(this.myUser);
-}
+class AuthLoaded extends AuthState {}
 
 class AuthStateNotifierProvider extends StateNotifier<AuthState> {
   final AuthRepository _authRepository;
   AuthStateNotifierProvider(this._authRepository) : super(AuthInitial());
-
-  MyUser _myUser;
-  MyUser get myUser => _myUser;
 
   Future<void> signInWithEmailAndPassword(String email, String pass) async {
     try {
@@ -39,8 +33,7 @@ class AuthStateNotifierProvider extends StateNotifier<AuthState> {
       await _authRepository
           .signInWithEmailAndPassword(email, pass)
           .then((user) {
-        _myUser = user;
-        state = AuthLoaded(user);
+        state = AuthLoaded();
       });
     } on FirebaseException catch (e) {
       state = AuthError('${e.message}');
@@ -52,12 +45,10 @@ class AuthStateNotifierProvider extends StateNotifier<AuthState> {
   // The first time (in home page) the user is found, the firebase logged user is loaded into _myUser variable
   // so its avalable throughout the entire aplication until the logout (then _myUser is set to null)
   Future<MyUser> findCurrentMyUser() async {
-    _myUser = await _authRepository.findCurrentMyUser();
-    return _myUser;
+    return await _authRepository.findCurrentMyUser();
   }
 
-  Future<void> logout() async {
-    _myUser = null;
-    await _authRepository.logout();
+  Future<void> logout() {
+    return _authRepository.logout();
   }
 }

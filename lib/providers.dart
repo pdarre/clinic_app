@@ -61,7 +61,7 @@ final userAuthStream = StreamProvider<User>((ref) {
   return ref.watch(authRepository).authStateChanges;
 });
 
-final getFutureMyUser = FutureProvider.autoDispose<MyUser>((ref) async {
+final getFutureMyUser = FutureProvider<MyUser>((ref) async {
   final myUser = await ref.watch(authProvider).findCurrentMyUser();
   return myUser;
 });
