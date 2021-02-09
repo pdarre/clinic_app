@@ -1,51 +1,24 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:clinic_app/models/beds_model.dart';
 import 'package:clinic_app/models/rooms_model.dart';
+import 'package:clinic_app/pages/common_states_widgets/app_common_background.dart';
+import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
+import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
+import 'package:clinic_app/pages/common_states_widgets/common_app_bar.dart';
 import 'package:clinic_app/services/bed_services.dart';
 import 'package:clinic_app/services/user_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RoomDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Room room = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: new IconThemeData(color: Colors.blueGrey),
-        leading: IconButton(
-            icon: Icon(FontAwesomeIcons.chevronCircleLeft,
-                size: 25, color: Colors.blueGrey[500]),
-            onPressed: () => Navigator.of(context).pop()),
-        title: Text(
-          '${room.idRoom}',
-          style: TextStyle(color: Colors.blueGrey[700]),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-      ),
+      appBar: CommonAppBar(room.idRoom),
       body: Stack(
         children: [
-          Positioned(
-            left: -200,
-            bottom: -200,
-            child: Image.asset(
-              'assets/images/logo.png',
-              color: Colors.black12,
-              height: 500,
-            ),
-          ),
-          Positioned(
-            right: -200,
-            top: -200,
-            child: Image.asset(
-              'assets/images/logo.png',
-              color: Colors.black12,
-              height: 500,
-            ),
-          ),
+          AppCommonBackground(),
           Column(
             children: [
               Row(
@@ -86,10 +59,11 @@ class RoomDetailPage extends StatelessWidget {
               Expanded(
                 child: Container(
                   child: ListView.builder(
+                    itemExtent: 80,
                     physics: BouncingScrollPhysics(),
                     itemCount: room.beds.length,
                     itemBuilder: (context, index) {
-                      return _BedTile(idBed: room.beds[index]);
+                      return BedTile(room.beds[index]);
                     },
                   ),
                 ),
@@ -102,20 +76,17 @@ class RoomDetailPage extends StatelessWidget {
   }
 }
 
-class _BedTile extends ConsumerWidget {
+class BedTile extends ConsumerWidget {
   final String idBed;
-  _BedTile({this.idBed});
+  BedTile(this.idBed);
 
   @override
   Widget build(BuildContext context, watch) {
     final bedFutureProvider = watch(getBedByIdBedFutureProvider(idBed));
 
     return bedFutureProvider.when(
-      loading: () => Container(
-          height: 10,
-          width: 10,
-          child: CircularProgressIndicator(strokeWidth: 0.5)),
-      error: (error, stack) => Center(child: Text('${error.toString()}')),
+      loading: () => BuildLoading(),
+      error: (error, stack) => BuildError(error),
       data: (bed) => BedCard(bed),
     );
   }
@@ -167,16 +138,6 @@ class BedCard extends StatelessWidget {
                   return Container();
                 },
               ),
-        // FutureBuilder(
-        //     future: context.read(userProvider).findUserByUid(bed.idPatient),
-        //     builder: (context, snapshot) {
-        //       if (snapshot.hasData) {
-        //         MyUser myUser = snapshot.data;
-        //         return Text('${myUser.firstName} ${myUser.lastName}');
-        //       }
-        //       return LinearProgressIndicator();
-        //     },
-        //   ),
         trailing: Container(
           width: 80,
           child: Row(

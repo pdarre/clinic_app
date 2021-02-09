@@ -3,11 +3,6 @@ import 'package:clinic_app/providers.dart';
 import 'package:flutter_riverpod/all.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 
-// final getMedicineListStringByIdPatientIdFutureProvider = FutureProvider.autoDispose
-//     .family<List<String>, String>((ref, idPatient) async {
-//   return ref.watch(medicineRepository).getMedicineListByIdPatient(idPatient);
-// });
-
 final getMedicineListStringByIdPatientIdFutureProvider = FutureProvider
     .autoDispose
     .family<List<Medicine>, String>((ref, idPatient) async {

@@ -1,3 +1,5 @@
+import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
+import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
 import 'package:clinic_app/pages/home_page/home_page.dart';
 import 'package:clinic_app/pages/login_page/login_page.dart';
 import 'package:clinic_app/providers.dart';
@@ -24,10 +26,13 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, watch) {
     final isDarkFromPreferences = watch(retrieveThemeFromPreferences);
     context.read(themeProvider).getThemeFromPreferences();
-    return isDarkFromPreferences.when(
-      loading: () => BuildInitialLoading(),
-      error: (error, stack) => BuildInitialError(error),
-      data: (val) => BuildInitialPage(val),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: isDarkFromPreferences.when(
+        loading: () => BuildLoading(),
+        error: (error, stack) => BuildError(error),
+        data: (val) => BuildInitialPage(val),
+      ),
     );
   }
 }
@@ -51,34 +56,6 @@ class BuildInitialPage extends StatelessWidget {
           routes: MyRoutes.routes,
         );
       },
-    );
-  }
-}
-
-class BuildInitialLoading extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Loading'),
-        ),
-      ),
-    );
-  }
-}
-
-class BuildInitialError extends StatelessWidget {
-  final String error;
-  const BuildInitialError(this.error);
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('$error'),
-        ),
-      ),
     );
   }
 }

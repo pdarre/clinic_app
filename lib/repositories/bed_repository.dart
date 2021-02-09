@@ -13,23 +13,15 @@ class BedRepository implements BedRepositoryInterfase {
 
   @override
   Future<Bed> getBedByIdBed(String idBed) async {
-    Bed bed;
     try {
-      await db
-          .collection('beds')
-          .where('idBed', isEqualTo: idBed)
-          .get()
-          .then((QuerySnapshot querySnapshot) => {
-                querySnapshot.docs.forEach((doc) {
-                  bed = Bed.fromJson(doc.data());
-                })
-              });
+      QuerySnapshot query =
+          await db.collection('beds').where('idBed', isEqualTo: idBed).get();
+      return query.docs.map((item) => Bed.fromJson(item.data())).first;
     } on FirebaseException catch (e) {
       throw Exception(e.code);
     } catch (error) {
       throw Exception(error);
     }
-    return bed;
   }
 
   @override

@@ -1,8 +1,8 @@
 import 'package:clinic_app/models/rooms_model.dart';
+import 'package:clinic_app/pages/common_states_widgets/common_app_bar.dart';
 import 'package:clinic_app/services/room_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RoomsListPage extends ConsumerWidget {
   @override
@@ -10,20 +10,21 @@ class RoomsListPage extends ConsumerWidget {
     var roomList = watch(getAllRoomsFutureProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: new IconThemeData(color: Colors.blueGrey),
-        leading: IconButton(
-            icon: Icon(FontAwesomeIcons.chevronCircleLeft,
-                size: 25, color: Colors.blueGrey[500]),
-            onPressed: () => Navigator.of(context).pop()),
-        title: Text(
-          'Rooms',
-          style: TextStyle(color: Colors.blueGrey[700]),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-      ),
+      appBar: CommonAppBar('Rooms'),
+      // appBar: AppBar(
+      //   iconTheme: new IconThemeData(color: Colors.blueGrey),
+      //   leading: IconButton(
+      //       icon: Icon(FontAwesomeIcons.chevronCircleLeft,
+      //           size: 25, color: Colors.blueGrey[500]),
+      //       onPressed: () => Navigator.of(context).pop()),
+      //   title: Text(
+      //     'Rooms',
+      //     style: TextStyle(color: Colors.blueGrey[700]),
+      //   ),
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0,
+      //   centerTitle: true,
+      // ),
       body: Stack(
         children: [
           Positioned(
@@ -92,8 +93,8 @@ class _RoomTile extends StatelessWidget {
           Navigator.pushNamed(context, '/room-detail', arguments: room);
         },
         leading: (room.roomType == 'Single')
-            ? Image.asset('assets/images/room_x1.jpg')
-            : Image.asset('assets/images/room_x4.jpg'),
+            ? Image.asset('assets/images/room_x1.png')
+            : Image.asset('assets/images/room_x4.png'),
         title: Padding(
           padding: const EdgeInsets.all(5.0),
           child: Text(

@@ -16,7 +16,6 @@ class DoctorGreeting extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 10),
                 Text(
                   'Hi, doctor ${myUser?.lastName ?? ''}',
                   style: TextStyle(

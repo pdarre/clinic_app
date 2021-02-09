@@ -30,69 +30,57 @@ class AppointmentRepository implements AppointmentRepositoryInterfase {
   @override
   Future<List<Appointment>> getAppointmentsByIdDoctorAndDate(
       String idDoctor, DateTime date) async {
-    List<Appointment> appointments;
     try {
-      await _db
+      QuerySnapshot query = await _db
           .collection('appointments')
           .where('idDoctor', isEqualTo: idDoctor)
           .where('date', isEqualTo: Timestamp.fromDate(date))
-          .get()
-          .then((QuerySnapshot querySnapshot) => {
-                querySnapshot.docs.forEach((doc) {
-                  appointments.add(Appointment.fromJson(doc.data()));
-                })
-              });
+          .get();
+      return query.docs
+          .map((item) => Appointment.fromJson(item.data()))
+          .toList();
     } on FirebaseException catch (e) {
       throw Exception(e.code);
     } catch (error) {
       throw Exception(error);
     }
-    return appointments;
   }
 
   @override
   Future<List<Appointment>> getAllAppointmentsByIdUsuario(
       String idPatient) async {
-    List<Appointment> appointments;
     try {
-      await _db
+      QuerySnapshot query = await _db
           .collection('appointments')
           .where('idPatient', isEqualTo: idPatient)
           .orderBy('date', descending: true)
-          .get()
-          .then((QuerySnapshot querySnapshot) => {
-                querySnapshot.docs.forEach((doc) {
-                  appointments.add(Appointment.fromJson(doc.data()));
-                })
-              });
+          .get();
+      return query.docs
+          .map((item) => Appointment.fromJson(item.data()))
+          .toList();
     } on FirebaseException catch (e) {
       throw Exception(e.code);
     } catch (error) {
       throw Exception(error);
     }
-    return appointments;
   }
 
   @override
   Future<List<Appointment>> getAppointmentsByIdDoctor(String idDoctor) async {
-    var appointments = <Appointment>[];
     try {
-      await _db
+      QuerySnapshot query = await _db
           .collection('appointments')
           .where('idDoctor', isEqualTo: idDoctor)
           .orderBy('date', descending: false)
-          .get()
-          .then((QuerySnapshot querySnapshot) => {
-                querySnapshot.docs.forEach((doc) {
-                  appointments.add(Appointment.fromJson(doc.data()));
-                })
-              });
+          .get();
+      return query.docs
+          .map((item) => Appointment.fromJson(item.data()))
+          .toList();
     } on FirebaseException catch (e) {
       throw Exception(e.code);
     } catch (error) {
       throw Exception(error);
     }
-    return appointments;
   }
 
   @override
@@ -124,23 +112,17 @@ class AppointmentRepository implements AppointmentRepositoryInterfase {
 
   @override
   Future<Appointment> getAppointmentById(String idAppointment) async {
-    var appointments = <Appointment>[];
     try {
-      await _db
+      QuerySnapshot query = await _db
           .collection('appointments')
           .where('idAppointment', isEqualTo: idAppointment)
-          .get()
-          .then((QuerySnapshot querySnapshot) => {
-                querySnapshot.docs.forEach((doc) {
-                  appointments.add(Appointment.fromJson(doc.data()));
-                })
-              });
+          .get();
+      return query.docs.map((item) => Appointment.fromJson(item.data())).first;
     } on FirebaseException catch (e) {
       throw Exception(e.code);
     } catch (error) {
       throw Exception(error);
     }
-    return appointments[0];
   }
 
   @override

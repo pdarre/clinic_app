@@ -12,24 +12,18 @@ class RoomRepository implements RoomRepositoryInterfase {
 
   @override
   Future<List<Room>> getAllRooms() async {
-    List<Room> rooms = [];
     try {
-      await db
+      QuerySnapshot query = await db
           .collection('rooms')
           .orderBy('roomType')
           .orderBy('idRoom', descending: false)
-          .get()
-          .then((QuerySnapshot querySnapshot) => {
-                querySnapshot.docs.forEach((doc) {
-                  rooms.add(Room.fromJson(doc.data()));
-                })
-              });
+          .get();
+      return query.docs.map((item) => Room.fromJson(item.data())).toList();
     } on FirebaseException catch (e) {
       throw Exception(e.code);
     } catch (error) {
       throw Exception(error);
     }
-    return rooms;
   }
 
   @override

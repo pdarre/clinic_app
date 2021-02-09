@@ -1,9 +1,14 @@
 import 'package:clinic_app/models/appointments_model.dart';
 import 'package:clinic_app/models/medicine_model.dart';
+import 'package:clinic_app/models/users_model.dart';
+import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
+import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
+import 'package:clinic_app/pages/lost_connection_page/lost_connection_page.dart';
 import 'package:clinic_app/providers.dart';
 import 'package:clinic_app/services/appointment_services.dart';
 import 'package:clinic_app/services/medicine_services.dart';
 import 'package:clinic_app/services/user_services.dart';
+import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 import 'dart:ui';
@@ -17,12 +22,20 @@ class AppointmentDetail extends ConsumerWidget {
     final String appointmentId = ModalRoute.of(context).settings.arguments;
     final getAppointment =
         watch(getAppointmentByIdFutureProvider(appointmentId));
-    return Scaffold(
-        body: getAppointment.when(
-      loading: () => Center(child: CircularProgressIndicator()),
-      error: (error, stack) => Center(child: Text('Upss..')),
-      data: (appointment) => BuildAppointmentPage(appointment),
-    ));
+    return ConnectivityBuilder(
+      builder: (context, isConnected, status) {
+        if (isConnected != null && isConnected) {
+          return Scaffold(
+              body: getAppointment.when(
+            loading: () => BuildLoading(),
+            error: (error, stack) => BuildError(error),
+            data: (appointment) => BuildAppointmentPage(appointment),
+          ));
+        } else {
+          return ConnectionLostPage();
+        }
+      },
+    );
   }
 }
 
@@ -57,8 +70,8 @@ class AppointmentDetailHeader extends ConsumerWidget {
 }
 
 class Header extends StatelessWidget {
-  final myUser;
-  final appointment;
+  final MyUser myUser;
+  final Appointment appointment;
 
   const Header(this.myUser, this.appointment);
 
@@ -136,12 +149,22 @@ class Header extends StatelessWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.all(10),
-                      child: CircleAvatar(
-                        maxRadius: 42,
-                        backgroundColor: Colors.blueGrey,
-                        child: CircleAvatar(
-                          backgroundImage: NetworkImage(myUser.photo),
-                          maxRadius: 40,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                              '/patient-detail-page',
+                              arguments: myUser);
+                        },
+                        child: Hero(
+                          tag: myUser.userId,
+                          child: CircleAvatar(
+                            maxRadius: 42,
+                            backgroundColor: Colors.blueGrey,
+                            child: CircleAvatar(
+                              backgroundImage: NetworkImage(myUser.photo),
+                              maxRadius: 40,
+                            ),
+                          ),
                         ),
                       ),
                     ),

@@ -11,37 +11,22 @@ class PatientRepository implements PatientRepositoryInterfase {
 
   @override
   Future<List<MyUser>> getAllPatients() async {
-    var myUsers = <MyUser>[];
     try {
-      await users
-          .where('userType', isEqualTo: 'U')
-          .get()
-          .then((QuerySnapshot querySnapshot) => {
-                querySnapshot.docs.forEach((doc) {
-                  myUsers.add(MyUser.fromJson(doc.data()));
-                })
-              });
+      QuerySnapshot query = await users.where('userType', isEqualTo: 'U').get();
+      return query.docs.map((item) => MyUser.fromJson(item.data())).toList();
     } on FirebaseException catch (e) {
       throw Exception(e.code);
     } catch (error) {
       throw Exception(error);
     }
-    return myUsers;
   }
 
   @override
   Future<MyUser> getPatientById(String idPatient) async {
-    MyUser myUser;
     try {
-      await users
-          .where('userId', isEqualTo: idPatient)
-          .get()
-          .then((QuerySnapshot querySnapshot) => {
-                querySnapshot.docs.forEach((doc) {
-                  myUser = MyUser.fromJson(doc.data());
-                })
-              });
-      return myUser;
+      QuerySnapshot query =
+          await users.where('userId', isEqualTo: idPatient).get();
+      return query.docs.map((item) => MyUser.fromJson(item.data())).first;
     } on FirebaseException catch (e) {
       throw Exception(e.code);
     } catch (error) {

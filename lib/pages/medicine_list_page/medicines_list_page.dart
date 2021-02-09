@@ -1,65 +1,48 @@
 import 'package:clinic_app/models/medicine_model.dart';
+import 'package:clinic_app/pages/common_states_widgets/app_common_background.dart';
+import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
+import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
+import 'package:clinic_app/pages/common_states_widgets/common_app_bar.dart';
+import 'package:clinic_app/pages/lost_connection_page/lost_connection_page.dart';
 import 'package:clinic_app/services/medicine_services.dart';
 import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MedicinesListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: new IconThemeData(color: Colors.blueGrey),
-        leading: IconButton(
-            icon: Icon(FontAwesomeIcons.chevronCircleLeft,
-                size: 25, color: Colors.blueGrey[500]),
-            onPressed: () => Navigator.of(context).pop()),
-        title: Text(
-          'Available medicines',
-          style: TextStyle(color: Colors.blueGrey[700]),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-      ),
+      appBar: CommonAppBar('Medicines'),
       body: ConnectivityBuilder(
         builder: (context, isConnected, status) {
           if (isConnected != null && isConnected) {
             return Stack(
               children: [
-                Positioned(
-                  left: -200,
-                  bottom: -200,
-                  child: Image.asset(
-                    'assets/images/logo.png',
-                    color: Colors.black12,
-                    height: 500,
-                  ),
-                ),
-                Positioned(
-                  right: -200,
-                  top: -200,
-                  child: Image.asset(
-                    'assets/images/logo.png',
-                    color: Colors.black12,
-                    height: 500,
-                  ),
-                ),
+                AppCommonBackground(),
+                //   Positioned(
+                //     left: -200,
+                //     bottom: -200,
+                //     child: Image.asset(
+                //       'assets/images/logo.png',
+                //       color: Colors.black12,
+                //       height: 500,
+                //     ),
+                //   ),
+                //   Positioned(
+                //     right: -200,
+                //     top: -200,
+                //     child: Image.asset(
+                //       'assets/images/logo.png',
+                //       color: Colors.black12,
+                //       height: 500,
+                //     ),
+                //   ),
                 MedicinesListBody(),
               ],
             );
           } else {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Check your internet connection'),
-                  SizedBox(height: 40),
-                  CircularProgressIndicator(strokeWidth: 1),
-                ],
-              ),
-            );
+            return ConnectionLostPage();
           }
         },
       ),
@@ -72,8 +55,8 @@ class MedicinesListBody extends ConsumerWidget {
   Widget build(BuildContext context, watch) {
     var allMedicinesList = watch(getAllMedicinesFutureProvider);
     return allMedicinesList.when(
-      loading: () => Center(child: const CircularProgressIndicator()),
-      error: (error, stack) => const Text('Oops'),
+      loading: () => BuildLoading(),
+      error: (error, stack) => BuildError(error),
       data: (list) => BuildMedicineList(list),
     );
   }

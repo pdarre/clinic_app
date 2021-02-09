@@ -40,7 +40,6 @@ class _SchedulePageState extends State<SchedulePage>
 
   loadEvents() async {
     final uid = FirebaseAuth.instance.currentUser.uid;
-    // _events = await context.read(appointmentRepositoryProvider).getEvents(uid);
     _events = await context.read(appointmentRepository).getEvents(uid);
     setState(() {});
   }

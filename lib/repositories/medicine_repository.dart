@@ -14,43 +14,29 @@ class MedicineRepository implements MedicineRepositoryInterfase {
 
   @override
   Future<List<Medicine>> getAllMedicines() async {
-    var medicines = <Medicine>[];
     try {
-      await db
-          .collection('medicines')
-          .get()
-          .then((QuerySnapshot querySnapshot) => {
-                querySnapshot.docs.forEach((doc) {
-                  medicines.add(Medicine.fromJson(doc.data()));
-                })
-              });
+      QuerySnapshot query = await db.collection('medicines').get();
+      return query.docs.map((item) => Medicine.fromJson(item.data())).toList();
     } on FirebaseException catch (e) {
       throw Exception(e.code);
     } catch (error) {
       throw Exception(error);
     }
-    return medicines;
   }
 
   @override
   Future<Medicine> getMedicineByIdMedicine(String idMedicine) async {
-    Medicine medicine;
     try {
-      await db
+      QuerySnapshot query = await db
           .collection('medicines')
           .where('idMedicine', isEqualTo: idMedicine)
-          .get()
-          .then((QuerySnapshot querySnapshot) => {
-                querySnapshot.docs.forEach((doc) {
-                  medicine = Medicine.fromJson(doc.data());
-                })
-              });
+          .get();
+      return query.docs.map((item) => Medicine.fromJson(item.data())).first;
     } on FirebaseException catch (e) {
       throw Exception(e.code);
     } catch (error) {
       throw Exception(error);
     }
-    return medicine;
   }
 
   @override
@@ -74,11 +60,10 @@ class MedicineRepository implements MedicineRepositoryInterfase {
               });
       return medicinesIds;
     } on FirebaseException catch (e) {
-      print(e.message);
-    } catch (ex) {
-      print(ex.toString());
+      throw Exception(e.code);
+    } catch (error) {
+      throw Exception(error);
     }
-    return [];
   }
 
   Future<List<MultiSelectItem<dynamic>>> medicinesSelectedItemsList() async {
@@ -89,9 +74,9 @@ class MedicineRepository implements MedicineRepositoryInterfase {
         itemsList.add(MultiSelectItem('${item.idMedicine}', '${item.name}'));
       }
     } on FirebaseException catch (e) {
-      print(e.message);
-    } catch (ex) {
-      print(ex.toString());
+      throw Exception(e.code);
+    } catch (error) {
+      throw Exception(error);
     }
     return itemsList;
   }

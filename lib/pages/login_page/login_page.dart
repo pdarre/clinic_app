@@ -1,5 +1,7 @@
 import 'dart:ui';
-
+import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
+import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
+import 'package:clinic_app/pages/lost_connection_page/lost_connection_page.dart';
 import 'package:clinic_app/providers.dart';
 import 'package:clinic_app/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +27,9 @@ class LoginPage extends StatelessWidget {
                 builder: (context, watch, child) {
                   final state = watch(authProvider.state);
                   if (state is AuthError) {
-                    return LoginError(state.message);
+                    return BuildError(state.message);
                   } else if (state is AuthLoading) {
-                    return LoadingBody();
+                    return BuildLoading();
                   } else if (state is AuthLoaded) {
                     return LoginBody();
                   } else {
@@ -36,45 +38,9 @@ class LoginPage extends StatelessWidget {
                 },
               );
             } else {
-              return Scaffold(
-                body: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Check your internet connection'),
-                      SizedBox(height: 20),
-                      CircularProgressIndicator(strokeWidth: 1),
-                    ],
-                  ),
-                ),
-              );
+              return ConnectionLostPage();
             }
           },
-        ),
-      ),
-    );
-  }
-}
-
-class LoginError extends StatelessWidget {
-  final String error;
-  const LoginError(this.error);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Ups, something went wrong'),
-            Text('$error'),
-            RaisedButton(
-              child: Text('Go back'),
-              onPressed: () {
-                return LoginBody();
-              },
-            ),
-          ],
         ),
       ),
     );
@@ -158,25 +124,7 @@ class LoginHeader extends StatelessWidget {
             height: 200,
             child: Image.asset('assets/images/logo.png'),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class LoadingBody extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          LoginBackground(),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(child: CircularProgressIndicator()),
-            ],
-          ),
+          SizedBox(height: 50)
         ],
       ),
     );

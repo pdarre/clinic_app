@@ -1,4 +1,5 @@
 import 'package:clinic_app/pages/appointment_detail_page/appointment_detail.dart';
+import 'package:clinic_app/pages/map_page/map_page.dart';
 import 'package:clinic_app/pages/medicine_detail_page/medicine_detail_page.dart';
 import 'package:clinic_app/pages/medicine_list_page/medicines_list_page.dart';
 import 'package:clinic_app/pages/patient_detail_page/patient_detail_page.dart';
@@ -22,6 +23,6 @@ class MyRoutes {
     // // '/service-add-user': (context) => ServiceAddUser(),
     // '/video-chat-page': (context) => VideoChatPage(),
     // '/chat-page': (context) => ChatPage(),
-    // '/user-location-page': (context) => UserLocationPage(),
+    '/map-page': (context) => MapPage(),
   };
 }

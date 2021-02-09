@@ -28,22 +28,15 @@ class AuthRepository implements AuthRepositoryInterfase {
 
   @override
   Future<MyUser> findUserById(String idUser) async {
-    MyUser myUser;
     try {
-      await users
-          .where('userId', isEqualTo: idUser)
-          .get()
-          .then((QuerySnapshot querySnapshot) => {
-                querySnapshot.docs.forEach((doc) {
-                  myUser = MyUser.fromJson(doc.data());
-                })
-              });
+      QuerySnapshot query =
+          await users.where('userId', isEqualTo: idUser).get();
+      return query.docs.map((item) => MyUser.fromJson(item.data())).first;
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code);
     } catch (error) {
       throw Exception(error);
     }
-    return myUser;
   }
 
   @override

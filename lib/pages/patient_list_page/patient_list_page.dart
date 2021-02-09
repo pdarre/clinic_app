@@ -1,5 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:clinic_app/models/users_model.dart';
+import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
+import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
 import 'package:clinic_app/services/patient_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
@@ -11,36 +13,9 @@ class FullPatientsList extends ConsumerWidget {
   Widget build(BuildContext context, watch) {
     final getAllPatients = watch(getAllPatientsFutureProvider);
     return getAllPatients.when(
-      loading: () => BuildPatientsListLoading(),
-      error: (error, stack) => BuildPatienstListError(error, stack),
+      loading: () => BuildLoading(),
+      error: (Object error, stack) => BuildError(error.toString()),
       data: (list) => BuildPatientsListData(list),
-    );
-  }
-}
-
-class BuildPatientsListLoading extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-  }
-}
-
-class BuildPatienstListError extends StatelessWidget {
-  final String error;
-  final StackTrace stack;
-  const BuildPatienstListError(this.error, this.stack);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Text(error),
-        ],
-      ),
     );
   }
 }
