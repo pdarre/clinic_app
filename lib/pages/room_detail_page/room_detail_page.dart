@@ -5,6 +5,7 @@ import 'package:clinic_app/pages/common_states_widgets/app_common_background.dar
 import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
 import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
 import 'package:clinic_app/pages/common_states_widgets/common_app_bar.dart';
+import 'package:clinic_app/providers.dart';
 import 'package:clinic_app/services/bed_services.dart';
 import 'package:clinic_app/services/user_services.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class RoomDetailPage extends StatelessWidget {
                             color: Colors.blueGrey[700], fontSize: 16),
                       ),
                       Text(
-                        'Ocupied: ${room.occupancy}',
+                        'Occupied: ${room.occupancy}',
                         style: TextStyle(
                             color: Colors.blueGrey[700], fontSize: 16),
                       ),
@@ -78,6 +79,7 @@ class RoomDetailPage extends StatelessWidget {
 
 class BedTile extends ConsumerWidget {
   final String idBed;
+
   BedTile(this.idBed);
 
   @override
@@ -92,11 +94,13 @@ class BedTile extends ConsumerWidget {
   }
 }
 
-class BedCard extends StatelessWidget {
+class BedCard extends ConsumerWidget {
   final Bed bed;
+
   const BedCard(this.bed);
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, watch) {
     return Card(
       margin: EdgeInsets.all(5),
       shape: RoundedRectangleBorder(
@@ -105,10 +109,14 @@ class BedCard extends StatelessWidget {
       color: Colors.blueGrey[12],
       elevation: 1,
       child: ListTile(
-        onTap: () {
+        onTap: () async {
           if (!bed.available) {
-            Navigator.pushNamed(context, '/patient-detail-page',
-                arguments: bed.idPatient);
+            final user = await watch(authRepository)
+                .findUserById(bed.idPatient)
+                .then((value) {
+              Navigator.of(context)
+                  .pushNamed('/patient-detail-page', arguments: value);
+            });
           }
         },
         title: (bed.available)

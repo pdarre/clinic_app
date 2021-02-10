@@ -3,9 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class BedRepositoryInterfase {
   Future<Bed> getBedByIdRoom(String idBed);
+
   Future<Bed> getBedByIdBed(String idBed);
+
   Future<List<Bed>> getAllBeds();
-  Future<List<String>> getBedByIdPatient(String idPatient);
+
+  Future<Bed> getBedByIdPatient(String idPatient);
 }
 
 class BedRepository implements BedRepositoryInterfase {
@@ -31,9 +34,19 @@ class BedRepository implements BedRepositoryInterfase {
   }
 
   @override
-  Future<List<String>> getBedByIdPatient(String idPatient) {
-    // TODO: implement getBedByIdPatient
-    throw UnimplementedError();
+  Future<Bed> getBedByIdPatient(String idPatient) async {
+    try {
+      QuerySnapshot query = await db
+          .collection('beds')
+          .where('idPatient', isEqualTo: idPatient)
+          .get();
+
+      return query.docs.map((e) => Bed.fromJson(e.data())).first;
+    } on FirebaseException catch (fireException) {
+      throw Exception(fireException.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   @override

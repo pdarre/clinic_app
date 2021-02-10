@@ -1,10 +1,13 @@
+import 'package:clinic_app/models/beds_model.dart';
 import 'package:clinic_app/models/rooms_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class RoomRepositoryInterfase {
   Future<Room> getRoomByIdRoom(String idRoom);
+
   Future<List<Room>> getAllRooms();
-  Future<List<String>> getRoomByIdPatient(String idPatient);
+
+  Future<Bed> getRoomByIdPatient(String idPatient);
 }
 
 class RoomRepository implements RoomRepositoryInterfase {
@@ -27,9 +30,20 @@ class RoomRepository implements RoomRepositoryInterfase {
   }
 
   @override
-  Future<List<String>> getRoomByIdPatient(String idPatient) {
-    // TODO: implement getRoomByIdPatient
-    throw UnimplementedError();
+  Future<Bed> getRoomByIdPatient(String idPatient) async {
+    Bed bed;
+    try {
+      QuerySnapshot query = await db
+          .collection('beds')
+          .where('idPatient', isEqualTo: idPatient)
+          .get();
+
+      return query.docs.map((e) => Bed.fromJson(e.data())).first;
+    } on FirebaseException catch (fireException) {
+      throw Exception(fireException.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   @override
