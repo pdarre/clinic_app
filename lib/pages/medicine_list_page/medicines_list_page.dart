@@ -7,7 +7,7 @@ import 'package:clinic_app/pages/lost_connection_page/lost_connection_page.dart'
 import 'package:clinic_app/services/medicine_services.dart';
 import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MedicinesListPage extends StatelessWidget {
   @override
@@ -20,29 +20,11 @@ class MedicinesListPage extends StatelessWidget {
             return Stack(
               children: [
                 AppCommonBackground(),
-                //   Positioned(
-                //     left: -200,
-                //     bottom: -200,
-                //     child: Image.asset(
-                //       'assets/images/logo.png',
-                //       color: Colors.black12,
-                //       height: 500,
-                //     ),
-                //   ),
-                //   Positioned(
-                //     right: -200,
-                //     top: -200,
-                //     child: Image.asset(
-                //       'assets/images/logo.png',
-                //       color: Colors.black12,
-                //       height: 500,
-                //     ),
-                //   ),
                 MedicinesListBody(),
               ],
             );
           } else {
-            return ConnectionLostPage();
+            return LostConnectionPage();
           }
         },
       ),

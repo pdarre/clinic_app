@@ -3,11 +3,14 @@ import 'package:clinic_app/models/users_model.dart';
 import 'package:clinic_app/providers.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeAppointmentCard extends ConsumerWidget {
   final Appointment appointment;
-  const HomeAppointmentCard({this.appointment});
+
+  const HomeAppointmentCard({
+    @required this.appointment,
+  }) : assert(appointment != null);
 
   @override
   Widget build(BuildContext context, watch) {
@@ -72,11 +75,10 @@ class HomeAppointmentCard extends ConsumerWidget {
                               SizedBox(height: 20),
                               Text(formatDate(
                                   appointment.date, [d, '-', M, '-', yyyy])),
-                              Text('Hora ${formatDate(appointment.date, [
-                                HH,
-                                ':',
-                                nn
-                              ])}'),
+                              Text('Hora ${formatDate(
+                                appointment.date,
+                                [HH, ':', nn],
+                              )}'),
                             ],
                           ),
                         ],

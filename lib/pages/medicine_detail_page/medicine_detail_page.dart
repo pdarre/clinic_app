@@ -2,8 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:clinic_app/models/medicine_model.dart';
 import 'package:clinic_app/pages/common_states_widgets/app_common_background.dart';
 import 'package:clinic_app/pages/common_states_widgets/common_app_bar.dart';
-import 'package:clinic_app/pages/lost_connection_page/lost_connection_page.dart';
-import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/material.dart';
 
 class MedicineDetailPage extends StatelessWidget {
@@ -11,17 +9,9 @@ class MedicineDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final Medicine medicine = ModalRoute.of(context).settings.arguments;
     final mySize = MediaQuery.of(context).size;
-    return ConnectivityBuilder(
-      builder: (context, isConnected, status) {
-        if (isConnected != null && isConnected) {
-          return Scaffold(
-            appBar: CommonAppBar(medicine.name),
-            body: MedicineDetailBody(mySize, medicine),
-          );
-        } else {
-          return ConnectionLostPage();
-        }
-      },
+    return Scaffold(
+      appBar: CommonAppBar(medicine.name),
+      body: MedicineDetailBody(mySize: mySize, medicine: medicine),
     );
   }
 }
@@ -29,30 +19,22 @@ class MedicineDetailPage extends StatelessWidget {
 class MedicineDetailBody extends StatelessWidget {
   final Size mySize;
   final Medicine medicine;
-  const MedicineDetailBody(this.mySize, this.medicine);
+
+  const MedicineDetailBody({
+    Key key,
+    @required this.mySize,
+    @required this.medicine,
+  })  : assert(
+          mySize != null,
+          medicine != null,
+        ),
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         AppCommonBackground(),
-        // Positioned(
-        //   left: -200,
-        //   bottom: -200,
-        //   child: Image.asset(
-        //     'assets/images/logo.png',
-        //     color: Colors.black12,
-        //     height: 500,
-        //   ),
-        // ),
-        // Positioned(
-        //   right: -200,
-        //   top: -200,
-        //   child: Image.asset(
-        //     'assets/images/logo.png',
-        //     color: Colors.black12,
-        //     height: 500,
-        //   ),
-        // ),
         Center(
           child: Container(
             height: double.infinity,
@@ -71,7 +53,7 @@ class MedicineDetailBody extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: mySize.height * 0.1),
-                  MedicineCard(medicine, mySize),
+                  MedicineCard(mySize: mySize, medicine: medicine),
                   SizedBox(height: mySize.height * 0.02),
                   Padding(
                     padding: const EdgeInsets.all(25.0),
@@ -91,9 +73,19 @@ class MedicineDetailBody extends StatelessWidget {
 }
 
 class MedicineCard extends StatelessWidget {
-  final Medicine medicine;
   final Size mySize;
-  const MedicineCard(this.medicine, this.mySize);
+  final Medicine medicine;
+
+  const MedicineCard({
+    Key key,
+    @required this.mySize,
+    @required this.medicine,
+  })  : assert(
+          mySize != null,
+          medicine != null,
+        ),
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -3,11 +3,15 @@ import 'package:clinic_app/pages/home_page/home_page_widgets/home_appointments.d
 import 'package:clinic_app/pages/home_page/home_page_widgets/home_center_tiles.dart';
 import 'package:clinic_app/pages/home_page/home_page_widgets/home_doctor_greeting.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeBodyPage extends ConsumerWidget {
   final MyUser myUser;
-  const HomeBodyPage({this.myUser});
+
+  const HomeBodyPage({
+    @required this.myUser,
+  }) : assert(myUser != null);
+
   @override
   Widget build(BuildContext context, watch) {
     return SingleChildScrollView(
@@ -34,9 +38,7 @@ class HomeBodyPage extends ConsumerWidget {
             ),
           ),
           SizedBox(height: 10),
-          HomeAppointments(
-            doctor: myUser,
-          ),
+          HomeAppointments(doctor: myUser),
         ],
       ),
     );

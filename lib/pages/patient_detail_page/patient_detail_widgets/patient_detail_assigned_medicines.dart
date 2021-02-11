@@ -3,7 +3,7 @@ import 'package:clinic_app/models/medicine_model.dart';
 import 'package:clinic_app/models/users_model.dart';
 import 'package:clinic_app/services/medicine_services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PatientAsignedMedicines extends ConsumerWidget {
   final MyUser patient;

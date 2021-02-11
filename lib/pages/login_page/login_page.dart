@@ -1,16 +1,18 @@
 import 'dart:ui';
+
 import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
 import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
-import 'package:clinic_app/pages/lost_connection_page/lost_connection_page.dart';
 import 'package:clinic_app/providers.dart';
 import 'package:clinic_app/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginPage extends StatelessWidget {
   final bool isVisible = false;
+
+  const LoginPage();
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -20,25 +22,17 @@ class LoginPage extends StatelessWidget {
         systemNavigationBarColor: Colors.black,
       ),
       child: Scaffold(
-        body: ConnectivityBuilder(
-          builder: (context, isConnected, status) {
-            if (isConnected != null && isConnected) {
-              return Consumer(
-                builder: (context, watch, child) {
-                  final state = watch(authProvider.state);
-                  if (state is AuthError) {
-                    return BuildError(state.message);
-                  } else if (state is AuthLoading) {
-                    return BuildLoading();
-                  } else if (state is AuthLoaded) {
-                    return LoginBody();
-                  } else {
-                    return LoginBody();
-                  }
-                },
-              );
+        body: Consumer(
+          builder: (context, watch, child) {
+            final state = watch(authProvider.state);
+            if (state is AuthError) {
+              return BuildError(state.message);
+            } else if (state is AuthLoading) {
+              return BuildLoading();
+            } else if (state is AuthLoaded) {
+              return LoginBody();
             } else {
-              return ConnectionLostPage();
+              return LoginBody();
             }
           },
         ),
@@ -48,6 +42,8 @@ class LoginPage extends StatelessWidget {
 }
 
 class LoginBody extends StatelessWidget {
+  const LoginBody();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -80,6 +76,8 @@ class LoginBody extends StatelessWidget {
 }
 
 class LoginBackground extends StatelessWidget {
+  const LoginBackground();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -108,6 +106,8 @@ class LoginBackground extends StatelessWidget {
 }
 
 class LoginHeader extends StatelessWidget {
+  const LoginHeader();
+
   @override
   Widget build(BuildContext context) {
     return Container(

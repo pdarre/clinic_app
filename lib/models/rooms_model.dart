@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:meta/meta.dart';
 
 class Room {
   String idRoom;
@@ -9,13 +10,18 @@ class Room {
   List<String> beds = [];
 
   Room({
-    this.bedCount,
-    this.beds,
-    this.idRoom,
-    this.location,
-    this.occupancy,
-    this.roomType,
-  });
+    @required this.bedCount,
+    @required this.beds,
+    @required this.idRoom,
+    @required this.location,
+    @required this.occupancy,
+    @required this.roomType,
+  })  : assert(bedCount != null),
+        assert(beds != null),
+        assert(idRoom != null),
+        assert(location != null),
+        assert(occupancy != null),
+        assert(roomType != null);
 
   factory Room.fromRawJson(String str) => Room.fromJson(json.decode(str));
 

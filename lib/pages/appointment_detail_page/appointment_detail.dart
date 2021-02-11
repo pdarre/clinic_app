@@ -1,18 +1,17 @@
+import 'dart:ui';
+
 import 'package:clinic_app/models/appointments_model.dart';
 import 'package:clinic_app/models/medicine_model.dart';
 import 'package:clinic_app/models/users_model.dart';
 import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
 import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
-import 'package:clinic_app/pages/lost_connection_page/lost_connection_page.dart';
 import 'package:clinic_app/providers.dart';
 import 'package:clinic_app/services/appointment_services.dart';
 import 'package:clinic_app/services/medicine_services.dart';
 import 'package:clinic_app/services/user_services.dart';
-import 'package:cross_connectivity/cross_connectivity.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
-import 'dart:ui';
 import 'package:date_format/date_format.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
@@ -22,39 +21,35 @@ class AppointmentDetail extends ConsumerWidget {
     final String appointmentId = ModalRoute.of(context).settings.arguments;
     final getAppointment =
         watch(getAppointmentByIdFutureProvider(appointmentId));
-    return ConnectivityBuilder(
-      builder: (context, isConnected, status) {
-        if (isConnected != null && isConnected) {
-          return Scaffold(
-              body: getAppointment.when(
-            loading: () => BuildLoading(),
-            error: (error, stack) => BuildError(error),
-            data: (appointment) => BuildAppointmentPage(appointment),
-          ));
-        } else {
-          return ConnectionLostPage();
-        }
-      },
+    return getAppointment.when(
+      loading: () => BuildLoading(),
+      error: (error, stack) => BuildError(error),
+      data: (appointmnet) => BuildAppointmentPage(appointmnet),
     );
   }
 }
 
 class BuildAppointmentPage extends StatelessWidget {
   final Appointment appointment;
+
   const BuildAppointmentPage(this.appointment);
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AppointmentDetailHeader(appointment),
-        AppointmentDetailBody(appointment),
-      ],
+    return Scaffold(
+      body: Column(
+        children: [
+          AppointmentDetailHeader(appointment),
+          AppointmentDetailBody(appointment),
+        ],
+      ),
     );
   }
 }
 
 class AppointmentDetailHeader extends ConsumerWidget {
   final Appointment appointment;
+
   const AppointmentDetailHeader(this.appointment);
 
   @override
@@ -119,7 +114,7 @@ class Header extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 30, left: 20),
+                  padding: const EdgeInsets.only(top: 30, left: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -198,6 +193,7 @@ class Header extends StatelessWidget {
 
 class AppointmentDetailBody extends ConsumerWidget {
   final Appointment appointment;
+
   AppointmentDetailBody(this.appointment);
 
   final TextEditingController _treatmentCtrl = TextEditingController();
@@ -375,7 +371,9 @@ class AppointmentDetailBody extends ConsumerWidget {
 
 class Alert extends StatelessWidget {
   final Appointment appointment;
+
   const Alert(this.appointment);
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -404,6 +402,7 @@ class Alert extends StatelessWidget {
 class _MultiSelectDialog extends StatelessWidget {
   final Appointment appointment;
   final List<MultiSelectItem<dynamic>> list;
+
   const _MultiSelectDialog(this.appointment, this.list);
 
   @override
@@ -437,6 +436,7 @@ class _MultiSelectDialog extends StatelessWidget {
 
 class _MedicinesAsignedList extends StatelessWidget {
   final Appointment appointment;
+
   const _MedicinesAsignedList({Key key, this.appointment}) : super(key: key);
 
   @override

@@ -22,40 +22,32 @@ class CenterTiles extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _tileCard(
-                    context,
-                    'My patients',
-                    '',
-                    'patient.png',
-                    '/full-patients-list-page',
-                  ),
-                  _tileCard(
-                    context,
-                    'Medicines',
-                    '',
-                    'medicine.png',
-                    '/medicines-list-page',
-                  ),
+                  const _TileCard(
+                      title: 'My patients',
+                      subtitle: '',
+                      imageName: 'patient.png',
+                      link: '/full-patients-list-page'),
+                  const _TileCard(
+                      title: 'Medicines',
+                      subtitle: '',
+                      imageName: 'medicine.png',
+                      link: '/medicines-list-page'),
                 ],
               ),
               SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _tileCard(
-                    context,
-                    'Rooms',
-                    '',
-                    'hospital_room_2.png',
-                    '/rooms-list-page',
-                  ),
-                  _tileCard(
-                    context,
-                    'Schedule',
-                    '',
-                    'agenda.png',
-                    '/schedule-page',
-                  ),
+                  const _TileCard(
+                      title: 'Rooms',
+                      subtitle: '',
+                      imageName: 'hospital_room_2.png',
+                      link: '/rooms-list-page'),
+                  const _TileCard(
+                      title: 'Schedule',
+                      subtitle: '',
+                      imageName: 'agenda.png',
+                      link: '/schedule-page'),
                 ],
               ),
               SizedBox(height: 10),
@@ -67,16 +59,35 @@ class CenterTiles extends StatelessWidget {
   }
 }
 
-Widget _tileCard(BuildContext context, String title, String subtitle,
-    String imageName, String link) {
-  return InkWell(
-    child: TileCard(
-      title: '$title',
-      subTitle: '$subtitle',
-      imageName: '$imageName',
-    ),
-    onTap: () {
-      Navigator.of(context).pushNamed('$link');
-    },
-  );
+class _TileCard extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final String imageName;
+  final String link;
+
+  const _TileCard({
+    Key key,
+    @required this.title,
+    @required this.subtitle,
+    @required this.imageName,
+    @required this.link,
+  })  : assert(title != null),
+        assert(subtitle != null),
+        assert(imageName != null),
+        assert(link != null),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: TileCard(
+        title: '$title',
+        subTitle: '$subtitle',
+        imageName: '$imageName',
+      ),
+      onTap: () {
+        Navigator.of(context).pushNamed('$link');
+      },
+    );
+  }
 }

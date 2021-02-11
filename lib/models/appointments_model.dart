@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:meta/meta.dart';
 
 class Appointment {
   String idAppointment;
@@ -16,18 +17,28 @@ class Appointment {
 
   Appointment({
     this.completed = false,
-    this.date,
-    this.idAppointment,
-    this.idBed,
-    this.idDoctor,
-    this.idDocument,
-    this.idPatient,
-    this.medicines,
-    this.obs,
-    this.reason,
-    this.specialty,
-    this.treatment,
-  });
+    @required this.date,
+    @required this.idAppointment,
+    @required this.idBed,
+    @required this.idDoctor,
+    @required this.idDocument,
+    @required this.idPatient,
+    @required this.medicines,
+    @required this.obs,
+    @required this.reason,
+    @required this.specialty,
+    @required this.treatment,
+  })  : assert(date != null),
+        assert(idAppointment != null),
+        assert(idBed != null),
+        assert(idDoctor != null),
+        assert(idDocument != null),
+        assert(idPatient != null),
+        assert(medicines != null),
+        assert(obs != null),
+        assert(reason != null),
+        assert(specialty != null),
+        assert(treatment != null);
 
   factory Appointment.fromRawJson(String str) =>
       Appointment.fromJson(json.decode(str));

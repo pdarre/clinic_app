@@ -2,7 +2,7 @@ import 'package:clinic_app/models/users_model.dart';
 import 'package:clinic_app/repositories/auth_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class AuthState {
   const AuthState();

@@ -1,6 +1,6 @@
 import 'package:clinic_app/models/medicine_model.dart';
 import 'package:clinic_app/providers.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 
 final getMedicineListStringByIdPatientIdFutureProvider = FutureProvider

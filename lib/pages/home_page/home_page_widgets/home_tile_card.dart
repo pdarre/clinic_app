@@ -5,7 +5,13 @@ class TileCard extends StatelessWidget {
   final String subTitle;
   final String imageName;
 
-  TileCard({this.title, this.subTitle, this.imageName});
+  TileCard({
+    @required this.title,
+    @required this.subTitle,
+    @required this.imageName,
+  })  : assert(title != null),
+        assert(subTitle != null),
+        assert(imageName != null);
 
   @override
   Widget build(BuildContext context) {

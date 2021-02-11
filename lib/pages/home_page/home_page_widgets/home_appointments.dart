@@ -2,13 +2,17 @@ import 'package:clinic_app/models/appointments_model.dart';
 import 'package:clinic_app/models/users_model.dart';
 import 'package:clinic_app/pages/home_page/home_page_widgets/home_appointment_card.dart';
 import 'package:clinic_app/providers.dart';
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeAppointments extends ConsumerWidget {
   final MyUser doctor;
-  const HomeAppointments({this.doctor});
+
+  const HomeAppointments({
+    @required this.doctor,
+  }) : assert(doctor != null);
+
   @override
   Widget build(BuildContext context, watch) {
     final appointmentsList = watch(appointmentsStream.stream);
@@ -25,9 +29,9 @@ class HomeAppointments extends ConsumerWidget {
               valueColor: AlwaysStoppedAnimation<Color>(Colors.blueGrey),
             ));
           } else if (snapshot.hasError) {
-            return Center(child: Text('Something went wrong..'));
+            return Center(child: const Text('Something went wrong..'));
           } else if (snapshot.hasData && snapshot.data.size == 0) {
-            return Center(child: Text('No appointments to show.'));
+            return Center(child: const Text('No appointments to show.'));
           }
           return ListView.builder(
             scrollDirection: Axis.horizontal,

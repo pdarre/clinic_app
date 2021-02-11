@@ -3,7 +3,7 @@ import 'package:clinic_app/models/users_model.dart';
 import 'package:clinic_app/pages/home_page/home_page_widgets/home_tile_card.dart';
 import 'package:clinic_app/services/bed_services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PatientAssignedRoom extends StatelessWidget {
   final MyUser patient;

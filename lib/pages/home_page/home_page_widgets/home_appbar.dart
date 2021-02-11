@@ -1,11 +1,15 @@
 import 'package:clinic_app/models/users_model.dart';
 import 'package:clinic_app/providers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final MyUser myUser;
-  const HomeAppBar(this.myUser);
+
+  const HomeAppBar({
+    @required this.myUser,
+  }) : assert(myUser != null);
+
   @override
   Widget build(BuildContext context, watch) {
     return PreferredSize(
@@ -58,7 +62,7 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
                     context.read(authProvider).logout();
                     Navigator.of(context).pop();
                   },
-                  child: Text('Sign out'),
+                  child: const Text('Sign out'),
                 ),
               ),
             ],
@@ -78,7 +82,7 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 const CircleAvatar(
                   maxRadius: 8,
                   backgroundColor: Colors.red,
-                  child: Text(
+                  child: const Text(
                     '2',
                     style: TextStyle(fontSize: 10),
                   ),

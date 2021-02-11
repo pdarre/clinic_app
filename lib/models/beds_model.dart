@@ -1,12 +1,22 @@
 import 'dart:convert';
 
+import 'package:meta/meta.dart';
+
 class Bed {
   bool available;
   String idBed;
   String idRoom;
   String idPatient;
 
-  Bed({this.available, this.idBed, this.idPatient, this.idRoom});
+  Bed({
+    @required this.available,
+    @required this.idBed,
+    @required this.idPatient,
+    @required this.idRoom,
+  })  : assert(available != null),
+        assert(idBed != null),
+        assert(idPatient != null),
+        assert(idRoom != null);
 
   factory Bed.fromRawJson(String str) => Bed.fromJson(json.decode(str));
 

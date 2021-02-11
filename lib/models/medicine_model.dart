@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:meta/meta.dart';
 
 class Medicine {
   String idMedicine;
@@ -11,15 +12,22 @@ class Medicine {
   bool isSelected;
 
   Medicine({
-    this.description,
-    this.idMedicine,
-    this.imageUrl,
-    this.indications,
-    this.isSelected,
-    this.name,
-    this.presentation,
-    this.stock,
-  });
+    @required this.description,
+    @required this.idMedicine,
+    @required this.imageUrl,
+    @required this.indications,
+    @required this.isSelected,
+    @required this.name,
+    @required this.presentation,
+    @required this.stock,
+  })  : assert(description != null),
+        assert(idMedicine != null),
+        assert(imageUrl != null),
+        assert(indications != null),
+        assert(isSelected != null),
+        assert(name != null),
+        assert(presentation != null),
+        assert(stock != null);
 
   factory Medicine.fromRawJson(String str) =>
       Medicine.fromJson(json.decode(str));

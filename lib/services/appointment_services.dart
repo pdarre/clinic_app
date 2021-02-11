@@ -1,6 +1,6 @@
 import 'package:clinic_app/models/appointments_model.dart';
 import 'package:clinic_app/providers.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final getAppointmentByIdFutureProvider =
     FutureProvider.family<Appointment, String>((ref, idAppointment) async {

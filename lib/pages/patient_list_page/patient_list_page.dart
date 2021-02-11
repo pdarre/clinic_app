@@ -4,7 +4,7 @@ import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
 import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
 import 'package:clinic_app/services/patient_services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 

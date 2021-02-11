@@ -2,7 +2,7 @@ import 'package:clinic_app/models/rooms_model.dart';
 import 'package:clinic_app/pages/common_states_widgets/common_app_bar.dart';
 import 'package:clinic_app/services/room_services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RoomsListPage extends ConsumerWidget {
   @override
@@ -11,20 +11,6 @@ class RoomsListPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: CommonAppBar('Rooms'),
-      // appBar: AppBar(
-      //   iconTheme: new IconThemeData(color: Colors.blueGrey),
-      //   leading: IconButton(
-      //       icon: Icon(FontAwesomeIcons.chevronCircleLeft,
-      //           size: 25, color: Colors.blueGrey[500]),
-      //       onPressed: () => Navigator.of(context).pop()),
-      //   title: Text(
-      //     'Rooms',
-      //     style: TextStyle(color: Colors.blueGrey[700]),
-      //   ),
-      //   backgroundColor: Colors.transparent,
-      //   elevation: 0,
-      //   centerTitle: true,
-      // ),
       body: Stack(
         children: [
           Positioned(

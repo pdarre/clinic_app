@@ -1,25 +1,9 @@
 import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:meta/meta.dart';
 
 class MyUser {
-  MyUser({
-    this.userId,
-    this.phone,
-    this.email,
-    this.gender,
-    this.lastName,
-    this.firstName,
-    this.documentId,
-    this.photo,
-    this.userType,
-    this.height,
-    this.weight,
-    this.bloodType,
-    this.birthday,
-    this.specialty,
-    this.location,
-  });
-
   String userId;
   String phone;
   String email;
@@ -35,6 +19,38 @@ class MyUser {
   Timestamp birthday;
   String specialty;
   GeoPoint location;
+
+  MyUser({
+    @required this.userId,
+    @required this.phone,
+    @required this.email,
+    @required this.gender,
+    @required this.lastName,
+    @required this.firstName,
+    @required this.documentId,
+    @required this.photo,
+    @required this.userType,
+    @required this.height,
+    @required this.weight,
+    @required this.bloodType,
+    @required this.birthday,
+    @required this.specialty,
+    @required this.location,
+  })  : assert(userId != null),
+        assert(phone != null),
+        assert(email != null),
+        assert(gender != null),
+        assert(lastName != null),
+        assert(firstName != null),
+        assert(documentId != null),
+        assert(photo != null),
+        assert(userType != null),
+        assert(height != null),
+        assert(weight != null),
+        assert(bloodType != null),
+        assert(birthday != null),
+        assert(specialty != null),
+        assert(location != null);
 
   factory MyUser.fromRawJson(String str) => MyUser.fromJson(json.decode(str));
 

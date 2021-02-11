@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 
 class DoctorGreeting extends StatelessWidget {
   final MyUser myUser;
-  DoctorGreeting({this.myUser});
+
+  const DoctorGreeting({
+    this.myUser,
+  }) : assert(myUser != null);
+
   @override
   Widget build(BuildContext context) {
     final today = DateHelper().getTodayDate();
