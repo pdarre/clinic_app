@@ -2,6 +2,8 @@ import 'package:clinic_app/pages/common_states_widgets/app_common_background.dar
 import 'package:flutter/material.dart';
 
 class BuildLoading extends StatelessWidget {
+  const BuildLoading();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

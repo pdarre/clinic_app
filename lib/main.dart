@@ -11,7 +11,6 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
@@ -36,8 +35,8 @@ class MyApp extends ConsumerWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             home: isDarkFromPreferences.when(
-              loading: () => BuildLoading(),
-              error: (error, stack) => BuildError(error),
+              loading: () => const BuildLoading(),
+              error: (error, stack) => BuildError(message: error),
               data: (val) => BuildInitialPage(val),
             ),
           );

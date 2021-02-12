@@ -18,7 +18,7 @@ class AppointmentDetail extends ConsumerWidget {
     } else if (appointmentState is AppointmentLoading) {
       return BuildLoading();
     } else if (appointmentState is AppointmentError) {
-      return BuildError(appointmentState.message);
+      return BuildError(message: appointmentState.message);
     } else {
       return BuildInitial();
     }

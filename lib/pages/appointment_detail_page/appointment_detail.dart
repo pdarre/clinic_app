@@ -10,6 +10,7 @@ import 'package:clinic_app/services/appointment_services.dart';
 import 'package:clinic_app/services/medicine_services.dart';
 import 'package:clinic_app/services/user_services.dart';
 import 'package:date_format/date_format.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,8 +23,8 @@ class AppointmentDetail extends ConsumerWidget {
     final getAppointment =
         watch(getAppointmentByIdFutureProvider(appointmentId));
     return getAppointment.when(
-      loading: () => BuildLoading(),
-      error: (error, stack) => BuildError(error),
+      loading: () => const BuildLoading(),
+      error: (error, stack) => BuildError(message: error),
       data: (appointmnet) => BuildAppointmentPage(appointmnet),
     );
   }
@@ -39,8 +40,8 @@ class BuildAppointmentPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          AppointmentDetailHeader(appointment),
-          AppointmentDetailBody(appointment),
+          AppointmentDetailHeader(appointment: appointment),
+          AppointmentDetailBody(appointment: appointment),
         ],
       ),
     );
@@ -50,16 +51,21 @@ class BuildAppointmentPage extends StatelessWidget {
 class AppointmentDetailHeader extends ConsumerWidget {
   final Appointment appointment;
 
-  const AppointmentDetailHeader(this.appointment);
+  const AppointmentDetailHeader({
+    this.appointment,
+  }) : assert(appointment != null);
 
   @override
   Widget build(BuildContext context, watch) {
     final getUserById = watch(getUserByIdFutureProvider(appointment.idPatient));
 
     return getUserById.when(
-      loading: () => Center(child: CircularProgressIndicator()),
-      error: (error, stack) => Center(child: Text('Upss..')),
-      data: (myUser) => Header(myUser, appointment),
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stack) => const Center(child: Text('Upss..')),
+      data: (myUser) => Header(
+        myUser: myUser,
+        appointment: appointment,
+      ),
     );
   }
 }
@@ -68,10 +74,17 @@ class Header extends StatelessWidget {
   final MyUser myUser;
   final Appointment appointment;
 
-  const Header(this.myUser, this.appointment);
+  const Header({
+    Key key,
+    this.myUser,
+    this.appointment,
+  })  : assert(myUser != null),
+        assert(appointment != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final myWith = MediaQuery.of(context).size.width;
     return Stack(
       alignment: Alignment.topCenter,
       children: [
@@ -107,7 +120,7 @@ class Header extends StatelessWidget {
         Container(
           margin: EdgeInsets.only(top: 70),
           height: 130,
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: myWith * 0.9,
           child: Card(
             elevation: 5,
             child: Row(
@@ -194,7 +207,9 @@ class Header extends StatelessWidget {
 class AppointmentDetailBody extends ConsumerWidget {
   final Appointment appointment;
 
-  AppointmentDetailBody(this.appointment);
+  AppointmentDetailBody({
+    this.appointment,
+  }) : assert(appointment != null);
 
   final TextEditingController _treatmentCtrl = TextEditingController();
   final TextEditingController _notesCtrl = TextEditingController();
@@ -312,7 +327,7 @@ class AppointmentDetailBody extends ConsumerWidget {
                                 loading: () =>
                                     Center(child: CircularProgressIndicator()),
                                 error: (error, stack) =>
-                                    Center(child: Text('Upss..')),
+                                    Center(child: const Text('Upss..')),
                                 data: (list) =>
                                     _MultiSelectDialog(appointment, list),
                               );
@@ -332,11 +347,18 @@ class AppointmentDetailBody extends ConsumerWidget {
                                         Colors.blueGrey[500]),
                                 elevation: MaterialStateProperty.all(1),
                               ),
-                              child: Text('End Consultation'),
+                              child: const Text('End Consultation'),
                               onPressed: () {
                                 appointment.treatment = _treatmentCtrl.text;
                                 appointment.obs = _notesCtrl.text;
                                 appointment.completed = true;
+                                // showDialog(
+                                //     context: context,
+                                //     builder: (BuildContext context) {
+                                //       return EndAppointmentDialogBox(
+                                //         appointment: appointment,
+                                //       );
+                                //     });
                                 showDialog(
                                   context: context,
                                   builder: (context) {

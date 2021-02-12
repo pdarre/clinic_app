@@ -3,9 +3,7 @@ import 'package:clinic_app/pages/common_states_widgets/app_common_background.dar
 import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
 import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
 import 'package:clinic_app/pages/common_states_widgets/common_app_bar.dart';
-import 'package:clinic_app/pages/lost_connection_page/lost_connection_page.dart';
 import 'package:clinic_app/services/medicine_services.dart';
-import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,39 +12,37 @@ class MedicinesListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CommonAppBar('Medicines'),
-      body: ConnectivityBuilder(
-        builder: (context, isConnected, status) {
-          if (isConnected != null && isConnected) {
-            return Stack(
-              children: [
-                AppCommonBackground(),
-                MedicinesListBody(),
-              ],
-            );
-          } else {
-            return LostConnectionPage();
-          }
-        },
+      body: Stack(
+        children: [
+          const AppCommonBackground(),
+          const MedicinesListBody(),
+        ],
       ),
     );
   }
 }
 
 class MedicinesListBody extends ConsumerWidget {
+  const MedicinesListBody();
+
   @override
   Widget build(BuildContext context, watch) {
     var allMedicinesList = watch(getAllMedicinesFutureProvider);
     return allMedicinesList.when(
-      loading: () => BuildLoading(),
-      error: (error, stack) => BuildError(error),
-      data: (list) => BuildMedicineList(list),
+      loading: () => const BuildLoading(),
+      error: (error, stack) => BuildError(message: error),
+      data: (list) => BuildMedicineList(medicineList: list),
     );
   }
 }
 
 class BuildMedicineList extends StatelessWidget {
   final List<Medicine> medicineList;
-  const BuildMedicineList(this.medicineList);
+
+  const BuildMedicineList({
+    this.medicineList,
+  }) : assert(medicineList != null);
+
   @override
   Widget build(BuildContext context) {
     return Container(

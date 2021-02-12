@@ -13,16 +13,18 @@ class FullPatientsList extends ConsumerWidget {
   Widget build(BuildContext context, watch) {
     final getAllPatients = watch(getAllPatientsFutureProvider);
     return getAllPatients.when(
-      loading: () => BuildLoading(),
-      error: (Object error, stack) => BuildError(error.toString()),
-      data: (list) => BuildPatientsListData(list),
+      loading: () => const BuildLoading(),
+      error: (Object error, stack) => BuildError(message: error.toString()),
+      data: (list) => BuildPatientsListData(patientsList: list),
     );
   }
 }
 
 class BuildPatientsListData extends StatelessWidget {
   final List<MyUser> patientsList;
-  const BuildPatientsListData(this.patientsList);
+
+  const BuildPatientsListData({this.patientsList});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,12 +40,12 @@ class BuildPatientsListData extends StatelessWidget {
         },
         child: Stack(
           children: [
-            PatientListBackgroud(),
+            PatientListBackground(),
             CustomScrollView(
               physics: BouncingScrollPhysics(),
               slivers: [
                 BuildSliverAppBar(),
-                BuildSliverPatientsList(patientsList),
+                BuildSliverPatientsList(patientsList: patientsList),
               ],
             ),
           ],
@@ -54,27 +56,29 @@ class BuildPatientsListData extends StatelessWidget {
 }
 
 class BuildSliverPatientsList extends StatelessWidget {
-  final List<MyUser> patients;
-  const BuildSliverPatientsList(this.patients);
+  final List<MyUser> patientsList;
+
+  const BuildSliverPatientsList({this.patientsList});
+
   @override
   Widget build(BuildContext context) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
-          if (patients.isNotEmpty) {
+          if (patientsList.isNotEmpty) {
             return Column(
               children: [
                 SizedBox(height: 10),
                 InkWell(
                   onTap: () {
                     Navigator.of(context).pushNamed('/patient-detail-page',
-                        arguments: patients[index]);
+                        arguments: patientsList[index]);
                   },
                   child: FadeInRight(
                     duration: Duration(milliseconds: 80 * index),
                     child: ListTile(
                       leading: Hero(
-                        tag: patients[index].userId,
+                        tag: patientsList[index].userId,
                         child: CircleAvatar(
                           maxRadius: 30,
                           minRadius: 30,
@@ -83,13 +87,13 @@ class BuildSliverPatientsList extends StatelessWidget {
                             maxRadius: 28,
                             minRadius: 28,
                             backgroundImage:
-                                NetworkImage(patients[index].photo),
+                                NetworkImage(patientsList[index].photo),
                           ),
                         ),
                       ),
                       title: Text(
-                          '${patients[index].firstName} ${patients[index].lastName}'),
-                      subtitle: Text('${patients[index].email}'),
+                          '${patientsList[index].firstName} ${patientsList[index].lastName}'),
+                      subtitle: Text('${patientsList[index].email}'),
                       trailing: Icon(Icons.chevron_right),
                     ),
                   ),
@@ -101,7 +105,7 @@ class BuildSliverPatientsList extends StatelessWidget {
             return Center(child: Text('No patients to show'));
           }
         },
-        childCount: patients.length,
+        childCount: patientsList.length,
       ),
     );
   }
@@ -162,7 +166,9 @@ class BuildSliverAppBar extends StatelessWidget {
 
 class PatientTile extends StatelessWidget {
   final MyUser patient;
-  const PatientTile(this.patient);
+
+  const PatientTile({this.patient});
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -183,7 +189,7 @@ class PatientTile extends StatelessWidget {
   }
 }
 
-class PatientListBackgroud extends StatelessWidget {
+class PatientListBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(

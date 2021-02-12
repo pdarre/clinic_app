@@ -24,10 +24,7 @@ class MedicineDetailBody extends StatelessWidget {
     Key key,
     @required this.mySize,
     @required this.medicine,
-  })  : assert(
-          mySize != null,
-          medicine != null,
-        ),
+  })  : assert(mySize != null, medicine != null),
         super(key: key);
 
   @override

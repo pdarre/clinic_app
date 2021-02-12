@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppCommonBackground extends StatelessWidget {
+  const AppCommonBackground();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 class BuildError extends StatelessWidget {
   final message;
-  const BuildError(this.message);
+
+  const BuildError({this.message}) : assert(message != null);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

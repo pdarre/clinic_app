@@ -64,7 +64,9 @@ class RoomDetailPage extends StatelessWidget {
                     physics: BouncingScrollPhysics(),
                     itemCount: room.beds.length,
                     itemBuilder: (context, index) {
-                      return BedTile(room.beds[index]);
+                      return room.beds[index].isNotEmpty
+                          ? BedTile(idBed: room.beds[index])
+                          : Text('no bed');
                     },
                   ),
                 ),
@@ -80,16 +82,16 @@ class RoomDetailPage extends StatelessWidget {
 class BedTile extends ConsumerWidget {
   final String idBed;
 
-  BedTile(this.idBed);
+  BedTile({this.idBed});
 
   @override
   Widget build(BuildContext context, watch) {
     final bedFutureProvider = watch(getBedByIdBedFutureProvider(idBed));
 
     return bedFutureProvider.when(
-      loading: () => BuildLoading(),
-      error: (error, stack) => BuildError(error),
-      data: (bed) => BedCard(bed),
+      loading: () => const BuildLoading(),
+      error: (error, stack) => BuildError(message: error),
+      data: (bed) => BedCard(bed: bed),
     );
   }
 }
@@ -97,7 +99,7 @@ class BedTile extends ConsumerWidget {
 class BedCard extends ConsumerWidget {
   final Bed bed;
 
-  const BedCard(this.bed);
+  const BedCard({this.bed}) : assert(bed != null);
 
   @override
   Widget build(BuildContext context, watch) {

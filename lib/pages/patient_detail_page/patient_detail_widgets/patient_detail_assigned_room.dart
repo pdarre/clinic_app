@@ -1,6 +1,5 @@
 import 'package:clinic_app/models/beds_model.dart';
 import 'package:clinic_app/models/users_model.dart';
-import 'package:clinic_app/pages/home_page/home_page_widgets/home_tile_card.dart';
 import 'package:clinic_app/services/bed_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,7 +16,7 @@ class PatientAssignedRoom extends StatelessWidget {
         Container(
           padding: EdgeInsets.only(left: 20, top: 20),
           alignment: Alignment.bottomLeft,
-          child: Text(
+          child: const Text(
             'ASSIGNED ROOM',
             style: TextStyle(
               fontWeight: FontWeight.w600,
@@ -44,7 +43,9 @@ class PatientAssignedRoom extends StatelessWidget {
 
 class AssignedRoomError extends StatelessWidget {
   final String error;
+
   const AssignedRoomError(this.error);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,10 +54,11 @@ class AssignedRoomError extends StatelessWidget {
   }
 }
 
-
 class BuildRoomAndBedCard extends StatelessWidget {
   final Bed bed;
+
   const BuildRoomAndBedCard(this.bed);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,10 +68,6 @@ class BuildRoomAndBedCard extends StatelessWidget {
         title: Text('${bed.idRoom}'),
         subtitle: Text('${bed.idBed}'),
       ),
-      // child: TileCard(
-      //   title:'${bed.idRoom}',
-      //   subTitle: '${bed.idBed}',
-      // ),
     );
   }
 }

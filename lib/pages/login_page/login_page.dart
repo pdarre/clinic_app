@@ -26,7 +26,7 @@ class LoginPage extends StatelessWidget {
           builder: (context, watch, child) {
             final state = watch(authProvider.state);
             if (state is AuthError) {
-              return BuildError(state.message);
+              return BuildError(message: state.message);
             } else if (state is AuthLoading) {
               return BuildLoading();
             } else if (state is AuthLoaded) {

@@ -23,44 +23,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="911dceec-d8e1-4e1f-b897-11d78c335d66" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/images/escudo.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/utils/contact_creator_dialog.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Pablo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Pablo.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/appointments_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/appointments_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/beds_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/beds_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/medicine_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/medicine_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/rooms_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/rooms_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/users_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/users_model.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/appointment_detail_page/appointment_detail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/appointment_detail_page/appointment_detail.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/appointment_detail_page/appointment_detail_page2.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/appointment_detail_page/appointment_detail_page2.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/appointment_detail_page/appointment_widgets/build_loaded.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/common_states_widgets/app_common_background.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/common_states_widgets/app_common_background.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/common_states_widgets/build_error.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/common_states_widgets/build_error.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/common_states_widgets/build_loading.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/common_states_widgets/build_loading.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/home_page/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home_page/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_appbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_appbar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_appointment_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_appointment_card.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_appointments.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_appointments.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_body_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_body_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_center_tiles.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_center_tiles.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_doctor_greeting.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_doctor_greeting.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_drawer_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_drawer_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_tile_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home_page/home_page_widgets/home_tile_card.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/login_page/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/login_page/login_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/lost_connection_page/lost_connection_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/lost_connection_page/lost_connection_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/map_page/map_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/map_page/map_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/medicine_detail_page/medicine_detail_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/medicine_detail_page/medicine_detail_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/medicine_list_page/medicines_list_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/medicine_list_page/medicines_list_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/patient_detail_page/patient_detail_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/patient_detail_page/patient_detail_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/patient_detail_page/patient_detail_widgets/patient_detail_assigned_medicines.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/patient_detail_page/patient_detail_widgets/patient_detail_assigned_medicines.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/patient_detail_page/patient_detail_widgets/patient_detail_assigned_room.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/patient_detail_page/patient_detail_widgets/patient_detail_assigned_room.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/patient_list_page/patient_list_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/patient_list_page/patient_list_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/room_detail_page/room_detail_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/room_detail_page/room_detail_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/room_list_page/rooms_list_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/room_list_page/rooms_list_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/schedule_page/schedule_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/schedule_page/schedule_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/providers/auth_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/providers/auth_provider.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/services/appointment_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/services/appointment_services.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/services/medicine_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/services/medicine_services.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/services/patient_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/services/patient_services.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/services/room_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/services/room_services.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/routes.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,6 +115,10 @@
       <screen x="0" y="0" width="1829" height="989" />
     </state>
     <state x="506" y="396" key="#Dart/0.0.1829.989@0.0.1829.989" timestamp="1612931590296" />
+    <state x="798" y="331" width="514" height="326" key="#Notifications" timestamp="1613137094415">
+      <screen x="0" y="0" width="1829" height="989" />
+    </state>
+    <state x="798" y="331" width="514" height="326" key="#Notifications/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1613137094415" />
     <state x="595" y="231" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1612451164768">
       <screen x="0" y="0" width="1829" height="989" />
     </state>
@@ -142,30 +127,30 @@
       <screen x="0" y="0" width="1829" height="989" />
     </state>
     <state x="645" y="241" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1613051453642" />
-    <state x="100" y="100" width="1629" height="789" key="AVDManager" timestamp="1613049719979">
+    <state x="100" y="100" width="1629" height="789" key="AVDManager" timestamp="1613137463590">
       <screen x="0" y="0" width="1829" height="989" />
     </state>
-    <state x="100" y="100" width="1629" height="789" key="AVDManager/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1613049719979" />
+    <state x="100" y="100" width="1629" height="789" key="AVDManager/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1613137463590" />
     <state x="100" y="100" width="1629" height="789" key="AVDManager/0.0.1829.989@0.0.1829.989" timestamp="1612931713917" />
-    <state width="1785" height="175" key="GridCell.Tab.0.bottom" timestamp="1613062056083">
+    <state width="1785" height="151" key="GridCell.Tab.0.bottom" timestamp="1613141478095">
       <screen x="0" y="0" width="1829" height="989" />
     </state>
-    <state width="1785" height="175" key="GridCell.Tab.0.bottom/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1613062056083" />
+    <state width="1785" height="151" key="GridCell.Tab.0.bottom/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1613141478095" />
     <state width="1362" height="322" key="GridCell.Tab.0.bottom/0.0.1829.989@0.0.1829.989" timestamp="1612981768947" />
-    <state width="1785" height="175" key="GridCell.Tab.0.center" timestamp="1613062056083">
+    <state width="1785" height="151" key="GridCell.Tab.0.center" timestamp="1613141478093">
       <screen x="0" y="0" width="1829" height="989" />
     </state>
-    <state width="1785" height="175" key="GridCell.Tab.0.center/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1613062056083" />
+    <state width="1785" height="151" key="GridCell.Tab.0.center/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1613141478093" />
     <state width="1362" height="322" key="GridCell.Tab.0.center/0.0.1829.989@0.0.1829.989" timestamp="1612981768947" />
-    <state width="1785" height="175" key="GridCell.Tab.0.left" timestamp="1613062056083">
+    <state width="1785" height="151" key="GridCell.Tab.0.left" timestamp="1613141478093">
       <screen x="0" y="0" width="1829" height="989" />
     </state>
-    <state width="1785" height="175" key="GridCell.Tab.0.left/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1613062056083" />
+    <state width="1785" height="151" key="GridCell.Tab.0.left/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1613141478093" />
     <state width="1362" height="322" key="GridCell.Tab.0.left/0.0.1829.989@0.0.1829.989" timestamp="1612981768947" />
-    <state width="1785" height="175" key="GridCell.Tab.0.right" timestamp="1613062056083">
+    <state width="1785" height="151" key="GridCell.Tab.0.right" timestamp="1613141478094">
       <screen x="0" y="0" width="1829" height="989" />
     </state>
-    <state width="1785" height="175" key="GridCell.Tab.0.right/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1613062056083" />
+    <state width="1785" height="151" key="GridCell.Tab.0.right/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1613141478094" />
     <state width="1362" height="322" key="GridCell.Tab.0.right/0.0.1829.989@0.0.1829.989" timestamp="1612981768947" />
     <state x="357" y="139" key="SettingsEditor" timestamp="1613064594872">
       <screen x="0" y="0" width="1829" height="989" />
@@ -176,9 +161,10 @@
       <screen x="0" y="0" width="1829" height="989" />
     </state>
     <state x="621" y="32" width="585" height="924" key="find.popup/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1613052153332" />
-    <state x="571" y="228" key="run.anything.popup" timestamp="1612980242676">
+    <state x="571" y="228" key="run.anything.popup" timestamp="1613139354726">
       <screen x="0" y="0" width="1829" height="989" />
     </state>
+    <state x="571" y="228" key="run.anything.popup/0.0.1829.989/3200.0.1280.680@0.0.1829.989" timestamp="1613139354726" />
     <state x="571" y="228" key="run.anything.popup/0.0.1829.989@0.0.1829.989" timestamp="1612980242676" />
     <state x="577" y="212" width="672" height="678" key="search.everywhere.popup" timestamp="1612966917917">
       <screen x="0" y="0" width="1829" height="989" />

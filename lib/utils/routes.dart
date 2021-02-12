@@ -1,4 +1,5 @@
 import 'package:clinic_app/pages/appointment_detail_page/appointment_detail.dart';
+import 'package:clinic_app/pages/home_page/home_page.dart';
 import 'package:clinic_app/pages/map_page/map_page.dart';
 import 'package:clinic_app/pages/medicine_detail_page/medicine_detail_page.dart';
 import 'package:clinic_app/pages/medicine_list_page/medicines_list_page.dart';
@@ -11,7 +12,7 @@ import 'package:clinic_app/pages/schedule_page/schedule_page.dart';
 class MyRoutes {
   static final routes = {
     // '/loginPage': (context) => LoginPage(),
-    // '/homePage': (context) => HomePage(),
+    '/homePage': (context) => HomePage(),
     '/patient-detail-page': (context) => PatientDetailPage(),
     '/full-patients-list-page': (context) => FullPatientsList(),
     '/medicines-list-page': (context) => MedicinesListPage(),

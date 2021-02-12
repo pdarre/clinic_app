@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:clinic_app/models/users_model.dart';
 import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
 import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
 import 'package:clinic_app/services/map_services.dart';
@@ -12,20 +11,28 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class MapPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, watch) {
-    final String userId = ModalRoute.of(context).settings.arguments;
+    final String userId = ModalRoute
+        .of(context)
+        .settings
+        .arguments;
     final userLocation =
-        watch(getUserLocationByIdPatientFutureProvider(userId));
+    watch(getUserLocationByIdPatientFutureProvider(userId));
     return userLocation.when(
-      loading: () => BuildLoading(),
-      error: (error, stack) => BuildError(error.toString()),
-      data: (data) => UserLocationPage(data),
+      loading: () => const BuildLoading(),
+      error: (error, stack) => BuildError(message: error.toString(),),
+    data: (data) => UserLocationPage(location: data
+    )
+    ,
     );
   }
 }
 
 class UserLocationPage extends StatefulWidget {
   final LatLng location;
-  const UserLocationPage(this.location);
+
+  const UserLocationPage({
+    this.location,
+  }) : assert(location != null);
 
   @override
   State<UserLocationPage> createState() => UserLocationPageState();

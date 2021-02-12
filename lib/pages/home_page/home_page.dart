@@ -14,8 +14,8 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, watch) {
     final myUser = watch(getFutureMyUser);
     return myUser.when(
-      loading: () => BuildLoading(),
-      error: (err, stack) => BuildError(err),
+      loading: () => const BuildLoading(),
+      error: (error, stack) => BuildError(message: error),
       data: (myUser) => BuildHomePageLoaded(myUser: myUser),
     );
   }

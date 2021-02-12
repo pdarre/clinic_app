@@ -1,4 +1,6 @@
 import 'package:clinic_app/models/rooms_model.dart';
+import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
+import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
 import 'package:clinic_app/pages/common_states_widgets/common_app_bar.dart';
 import 'package:clinic_app/services/room_services.dart';
 import 'package:flutter/material.dart';
@@ -36,9 +38,9 @@ class RoomsListPage extends ConsumerWidget {
           ),
           // TODO add connectivity check
           roomList.when(
-            loading: () => Center(child: CircularProgressIndicator()),
-            error: (error, stack) => Center(child: Text('Ops..')),
-            data: (list) => BuildRoomListBody(list),
+            loading: () => const BuildLoading(),
+            error: (error, stack) => BuildError(message: error.toString()),
+            data: (list) => BuildRoomListBody(roomList: list),
           )
         ],
       ),
@@ -48,7 +50,9 @@ class RoomsListPage extends ConsumerWidget {
 
 class BuildRoomListBody extends StatelessWidget {
   final List<Room> roomList;
-  const BuildRoomListBody(this.roomList);
+
+  const BuildRoomListBody({this.roomList});
+
   @override
   Widget build(BuildContext context) {
     return Container(
