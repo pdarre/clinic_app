@@ -31,7 +31,6 @@ class RoomRepository implements RoomRepositoryInterfase {
 
   @override
   Future<Bed> getRoomByIdPatient(String idPatient) async {
-    Bed bed;
     try {
       QuerySnapshot query = await db
           .collection('beds')

@@ -19,8 +19,10 @@ class HomeAppointmentCard extends ConsumerWidget {
       width: 150,
       child: InkWell(
         onTap: () {
-          Navigator.of(context).pushNamed('/appointment-detail',
-              arguments: appointment.idAppointment);
+          context
+              .read(appointmentsProvider)
+              .getAppointmentById(appointment.idAppointment);
+          Navigator.of(context).pushNamed('/appointment-detail');
         },
         child: Stack(
           children: [

@@ -48,8 +48,12 @@ class AssignedRoomError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('No assigned room'),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('No assigned room'),
+        Text('$error'),
+      ],
     );
   }
 }

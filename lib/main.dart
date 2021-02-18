@@ -37,7 +37,7 @@ class MyApp extends ConsumerWidget {
             home: isDarkFromPreferences.when(
               loading: () => const BuildLoading(),
               error: (error, stack) => BuildError(message: error),
-              data: (val) => BuildInitialPage(val),
+              data: (isDark) => BuildInitialPage(isDark: isDark),
             ),
           );
         } else {
@@ -53,8 +53,7 @@ class MyApp extends ConsumerWidget {
 // ignore: must_be_immutable
 class BuildInitialPage extends StatelessWidget {
   bool isDark;
-
-  BuildInitialPage(this.isDark);
+  BuildInitialPage({this.isDark});
 
   @override
   Widget build(BuildContext context) {

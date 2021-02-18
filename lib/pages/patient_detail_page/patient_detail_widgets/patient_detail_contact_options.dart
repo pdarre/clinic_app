@@ -99,7 +99,8 @@ class ContactOptions extends StatelessWidget {
           duration: Duration(milliseconds: 200),
           child: GestureDetector(
             onTap: () {
-              Navigator.of(context).pushNamed('/map-page', arguments: patient.userId);
+              Navigator.of(context)
+                  .pushNamed('/map-page', arguments: patient.userId);
             },
             child: Container(
               decoration: BoxDecoration(

@@ -2,6 +2,7 @@ import 'package:clinic_app/models/users_model.dart';
 import 'package:clinic_app/providers/appointment_provider.dart';
 import 'package:clinic_app/providers/appointments_lists_provider.dart';
 import 'package:clinic_app/providers/auth_provider.dart';
+import 'package:clinic_app/providers/chat_provider.dart';
 import 'package:clinic_app/providers/map_provider.dart';
 import 'package:clinic_app/providers/medicine_provider.dart';
 import 'package:clinic_app/providers/patient_provider.dart';
@@ -10,6 +11,7 @@ import 'package:clinic_app/providers/themes_provider.dart';
 import 'package:clinic_app/repositories/appointment_repository.dart';
 import 'package:clinic_app/repositories/auth_repository.dart';
 import 'package:clinic_app/repositories/bed_repository.dart';
+import 'package:clinic_app/repositories/chat_repository.dart';
 import 'package:clinic_app/repositories/map_repository.dart';
 import 'package:clinic_app/repositories/medicine_repository.dart';
 import 'package:clinic_app/repositories/patient_repository.dart';
@@ -34,6 +36,11 @@ final roomRepository = Provider<RoomRepository>((ref) => RoomRepository());
 final bedRepository = Provider<BedRepository>((ref) => BedRepository());
 
 final mapRepository = Provider<MapRepository>((ref) => MapRepository());
+
+final chatRepository = Provider<ChatRepository>((ref) => ChatRepository());
+
+final chatProvider =
+    Provider<ChatProvider>((ref) => ChatProvider(ref.watch(chatRepository)));
 
 final streamAppointments = Provider<StreamAppointments>(
   (ref) => StreamAppointments(),

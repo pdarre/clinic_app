@@ -15,19 +15,9 @@ class PatientDetailPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: const CommonAppBar(''),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            // fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(
-                Colors.white.withOpacity(0.08), BlendMode.dstATop),
-            image: const AssetImage('assets/images/logo.png'),
-          ),
-        ),
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: _PatientDetailBody(patient: patient),
-        ),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: _PatientDetailBody(patient: patient),
       ),
     );
   }

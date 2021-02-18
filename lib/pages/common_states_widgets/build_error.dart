@@ -2,9 +2,9 @@ import 'package:clinic_app/pages/common_states_widgets/app_common_background.dar
 import 'package:flutter/material.dart';
 
 class BuildError extends StatelessWidget {
-  final message;
+  final String message;
 
-  const BuildError({this.message}) : assert(message != null);
+  const BuildError({this.message});
 
   @override
   Widget build(BuildContext context) {

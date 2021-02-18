@@ -113,7 +113,7 @@ class BedCard extends ConsumerWidget {
       child: ListTile(
         onTap: () async {
           if (!bed.available) {
-            final user = await watch(authRepository)
+            await watch(authRepository)
                 .findUserById(bed.idPatient)
                 .then((value) {
               Navigator.of(context)
