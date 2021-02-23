@@ -1,6 +1,6 @@
 import 'package:clinic_app/models/appointments_model.dart';
 import 'package:clinic_app/models/users_model.dart';
-import 'package:clinic_app/providers.dart';
+import 'package:clinic_app/providers/providers_access/providers.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

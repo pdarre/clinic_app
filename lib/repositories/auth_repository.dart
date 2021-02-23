@@ -16,9 +16,11 @@ class AuthRepository implements AuthRepositoryInterfase {
   Stream<User> get authStateChanges => FirebaseAuth.instance.authStateChanges();
 
   @override
-  Future<void> signInWithEmailAndPassword(String email, String pass) async {
+  Future<UserCredential> signInWithEmailAndPassword(
+      String email, String pass) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: pass);
+      return await _auth.signInWithEmailAndPassword(
+          email: email, password: pass);
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code);
     } catch (error) {

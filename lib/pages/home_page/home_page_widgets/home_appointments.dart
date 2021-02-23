@@ -1,7 +1,7 @@
 import 'package:clinic_app/models/appointments_model.dart';
 import 'package:clinic_app/models/users_model.dart';
 import 'package:clinic_app/pages/home_page/home_page_widgets/home_appointment_card.dart';
-import 'package:clinic_app/providers.dart';
+import 'package:clinic_app/providers/providers_access/providers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

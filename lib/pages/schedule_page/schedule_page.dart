@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:clinic_app/providers/providers_access/providers.dart';
+import 'package:clinic_app/providers/services/user_services.dart';
 import 'package:clinic_app/models/appointments_model.dart';
 import 'package:clinic_app/models/users_model.dart';
-import 'package:clinic_app/providers.dart';
-import 'package:clinic_app/services/user_services.dart';
 import 'package:date_format/date_format.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

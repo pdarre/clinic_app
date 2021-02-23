@@ -1,7 +1,8 @@
 import 'package:clinic_app/models/appointments_model.dart';
 import 'package:clinic_app/models/medicine_model.dart';
-import 'package:clinic_app/providers/appointment_provider.dart';
-import 'package:clinic_app/services/medicine_services.dart';
+import 'package:clinic_app/providers/appointment_provider/appointments_states.dart';
+import 'package:clinic_app/providers/providers_access/providers.dart';
+import 'package:clinic_app/providers/services/medicine_services.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,15 +11,7 @@ import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 
-import '../../../providers.dart';
-
 class AppointmentDetailBody extends ConsumerWidget {
-  // final Appointment appointment;
-  //
-  // AppointmentDetailBody({
-  //   this.appointment,
-  // }) : assert(appointment != null);
-
   final TextEditingController _treatmentCtrl = TextEditingController();
   final TextEditingController _notesCtrl = TextEditingController();
 
@@ -26,7 +19,7 @@ class AppointmentDetailBody extends ConsumerWidget {
   Widget build(BuildContext context, watch) {
     final appointmentState = watch(appointmentsProvider.state);
     Appointment appointment;
-    if(appointmentState is AppointmentLoaded){
+    if (appointmentState is AppointmentLoaded) {
       appointment = appointmentState.appointment;
     }
 
@@ -60,7 +53,7 @@ class AppointmentDetailBody extends ConsumerWidget {
                         yyyy
                       ])}  ${formatDate(appointment.date, [HH, ':', nn])}Hs',
                       style:
-                      TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                     Divider(
                       thickness: 1,
@@ -137,7 +130,7 @@ class AppointmentDetailBody extends ConsumerWidget {
                           child: Consumer(
                             builder: (_, watch, __) {
                               final medicinesSelectedItems =
-                              watch(medicinesSelectedFutureProvider);
+                                  watch(medicinesSelectedFutureProvider);
                               return medicinesSelectedItems.when(
                                 loading: () =>
                                     Center(child: CircularProgressIndicator()),
@@ -156,26 +149,26 @@ class AppointmentDetailBody extends ConsumerWidget {
                       child: Consumer(
                         builder: (_, watch, __) {
                           final myAppointment =
-                          watch(appointmentsProvider.state);
+                              watch(appointmentsProvider.state);
                           if (myAppointment is AppointmentLoaded) {
                             print('');
                             return myAppointment.appointment.completed
                                 ? Container()
                                 : ElevatedButton(
-                              child: const Text('End appointment'),
-                              onPressed: () {
-                                appointment.treatment =
-                                    _treatmentCtrl.text;
-                                appointment.obs = _notesCtrl.text;
-                                appointment.completed = true;
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return Alert(appointment);
-                                  },
-                                );
-                              },
-                            );
+                                    child: const Text('End appointment'),
+                                    onPressed: () {
+                                      appointment.treatment =
+                                          _treatmentCtrl.text;
+                                      appointment.obs = _notesCtrl.text;
+                                      appointment.completed = true;
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return Alert(appointment);
+                                        },
+                                      );
+                                    },
+                                  );
                           }
                           return Container();
                         },
@@ -185,20 +178,20 @@ class AppointmentDetailBody extends ConsumerWidget {
                       child: Consumer(
                         builder: (_, watch, __) {
                           final myAppointment =
-                          watch(appointmentsProvider.state);
+                              watch(appointmentsProvider.state);
                           if (myAppointment is AppointmentLoaded) {
                             return !myAppointment.appointment.completed
                                 ? Container()
                                 : ElevatedButton(
-                              child: const Text('Reset'),
-                              onPressed: () {
-                                appointment.completed = false;
-                                appointment.medicines = [];
-                                context
-                                    .read(appointmentsProvider)
-                                    .updateAppointment(appointment);
-                              },
-                            );
+                                    child: const Text('Reset'),
+                                    onPressed: () {
+                                      appointment.completed = false;
+                                      appointment.medicines = [];
+                                      context
+                                          .read(appointmentsProvider)
+                                          .updateAppointment(appointment);
+                                    },
+                                  );
                           }
                           return Container();
                         },
@@ -256,26 +249,26 @@ class _MultiSelectDialog extends StatelessWidget {
     return Container(
       child: (!appointment.completed)
           ? MultiSelectDialogField(
-        initialValue: [],
-        items: list,
-        listType: MultiSelectListType.CHIP,
-        onConfirm: (values) {
-          appointment.medicines.clear();
-          if (values.length > 0) {
-            for (var i = 0; i < values.length; i++) {
-              appointment.medicines.add(values[i]);
-            }
-          }
-        },
-        buttonText: Text('Add medicines...  '),
-        buttonIcon: Icon(FontAwesomeIcons.plusSquare),
-        confirmText: Text('Confirm'),
-      )
+              initialValue: [],
+              items: list,
+              listType: MultiSelectListType.CHIP,
+              onConfirm: (values) {
+                appointment.medicines.clear();
+                if (values.length > 0) {
+                  for (var i = 0; i < values.length; i++) {
+                    appointment.medicines.add(values[i]);
+                  }
+                }
+              },
+              buttonText: Text('Add medicines...  '),
+              buttonIcon: Icon(FontAwesomeIcons.plusSquare),
+              confirmText: Text('Confirm'),
+            )
           : Container(
-        width: 200,
-        height: 100,
-        child: _MedicinesAssignedList(appointment: appointment),
-      ),
+              width: 200,
+              height: 100,
+              child: _MedicinesAssignedList(appointment: appointment),
+            ),
     );
   }
 }

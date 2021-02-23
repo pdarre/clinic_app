@@ -1,8 +1,8 @@
+import 'package:clinic_app/core/common_states_widgets/build_error.dart';
+import 'package:clinic_app/core/common_states_widgets/build_loading.dart';
+import 'package:clinic_app/providers/providers_access/providers.dart';
 import 'package:flutter/material.dart';
-import 'package:clinic_app/providers.dart';
 import 'package:clinic_app/models/users_model.dart';
-import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
-import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
 import 'package:clinic_app/pages/home_page/home_page_widgets/home_appbar.dart';
 import 'package:clinic_app/pages/home_page/home_page_widgets/home_body_page.dart';
 import 'package:clinic_app/pages/home_page/home_page_widgets/home_drawer_page.dart';

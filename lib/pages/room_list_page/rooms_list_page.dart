@@ -1,9 +1,9 @@
-import 'package:clinic_app/models/rooms_model.dart';
-import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
-import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
-import 'package:clinic_app/pages/common_states_widgets/common_app_bar.dart';
-import 'package:clinic_app/services/room_services.dart';
 import 'package:flutter/material.dart';
+import 'package:clinic_app/core/common_states_widgets/build_error.dart';
+import 'package:clinic_app/core/common_states_widgets/build_loading.dart';
+import 'package:clinic_app/core/common_states_widgets/common_app_bar.dart';
+import 'package:clinic_app/providers/services/room_services.dart';
+import 'package:clinic_app/models/rooms_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RoomsListPage extends ConsumerWidget {
@@ -36,7 +36,6 @@ class RoomsListPage extends ConsumerWidget {
               height: 300,
             ),
           ),
-          // TODO add connectivity check
           roomList.when(
             loading: () => const BuildLoading(),
             error: (error, stack) => BuildError(message: error.toString()),

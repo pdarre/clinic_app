@@ -1,8 +1,7 @@
 import 'dart:async';
-
-import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
-import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
-import 'package:clinic_app/services/map_services.dart';
+import 'package:clinic_app/core/common_states_widgets/build_error.dart';
+import 'package:clinic_app/core/common_states_widgets/build_loading.dart';
+import 'package:clinic_app/providers/services/map_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,18 +10,15 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class MapPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, watch) {
-    final String userId = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
+    final String userId = ModalRoute.of(context).settings.arguments;
     final userLocation =
-    watch(getUserLocationByIdPatientFutureProvider(userId));
+        watch(getUserLocationByIdPatientFutureProvider(userId));
     return userLocation.when(
       loading: () => const BuildLoading(),
-      error: (error, stack) => BuildError(message: error.toString(),),
-    data: (data) => UserLocationPage(location: data
-    )
-    ,
+      error: (error, stack) => BuildError(
+        message: error.toString(),
+      ),
+      data: (data) => UserLocationPage(location: data),
     );
   }
 }

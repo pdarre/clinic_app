@@ -1,9 +1,10 @@
-import 'package:clinic_app/models/users_model.dart';
-import 'package:clinic_app/providers.dart';
-import 'package:clinic_app/utils/contact_creator_dialog.dart';
-import 'package:day_night_switcher/day_night_switcher.dart';
+import 'package:clinic_app/providers/providers_access/providers.dart';
 import 'package:flutter/material.dart';
+import 'package:clinic_app/models/users_model.dart';
+import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'contact_creator_dialog.dart';
 
 class NavigationDrawer extends StatelessWidget {
   final MyUser myUser;
@@ -66,7 +67,7 @@ class CreateDrawerBodyItems extends StatelessWidget {
           },
         ),
         ListTile(
-          title: const Text('App version 1.0.0'),
+          title: const Text('Contact'),
           onTap: () {
             showDialog(
                 context: context,

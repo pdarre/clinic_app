@@ -1,8 +1,8 @@
+import 'package:clinic_app/core/common_states_widgets/app_common_background.dart';
+import 'package:clinic_app/core/common_states_widgets/common_app_bar.dart';
+import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:clinic_app/models/medicine_model.dart';
-import 'package:clinic_app/pages/common_states_widgets/app_common_background.dart';
-import 'package:clinic_app/pages/common_states_widgets/common_app_bar.dart';
-import 'package:flutter/material.dart';
 
 class MedicineDetailPage extends StatelessWidget {
   @override

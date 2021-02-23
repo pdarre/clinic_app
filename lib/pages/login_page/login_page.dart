@@ -1,9 +1,8 @@
 import 'dart:ui';
-
-import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
-import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
-import 'package:clinic_app/providers.dart';
-import 'package:clinic_app/providers/auth_provider.dart';
+import 'package:clinic_app/core/common_states_widgets/build_error.dart';
+import 'package:clinic_app/core/common_states_widgets/build_loading.dart';
+import 'package:clinic_app/providers/auth_provider/auth_states.dart';
+import 'package:clinic_app/providers/providers_access/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -1,10 +1,9 @@
 import 'package:clinic_app/models/users_model.dart';
-import 'package:clinic_app/providers/appointment_provider.dart';
+import 'package:clinic_app/providers/appointment_provider/appointments_states.dart';
+import 'package:clinic_app/providers/providers_access/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../../../providers.dart';
 
 class AppointmentHeader extends StatelessWidget {
   final MyUser patient;

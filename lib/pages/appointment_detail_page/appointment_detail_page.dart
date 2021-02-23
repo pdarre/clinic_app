@@ -1,11 +1,11 @@
+import 'package:clinic_app/core/common_states_widgets/build_error.dart';
+import 'package:clinic_app/core/common_states_widgets/build_initial.dart';
+import 'package:clinic_app/core/common_states_widgets/build_loading.dart';
+import 'package:clinic_app/providers/appointment_provider/appointments_states.dart';
+import 'package:clinic_app/providers/providers_access/providers.dart';
+import 'package:clinic_app/providers/services/user_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:clinic_app/providers.dart';
-import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
-import 'package:clinic_app/pages/common_states_widgets/build_initial.dart';
-import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
-import 'package:clinic_app/providers/appointment_provider.dart';
-import 'package:clinic_app/services/user_services.dart';
 import 'appointments_detail_widget/appointment_detail_body.dart';
 import 'appointments_detail_widget/appointment_header.dart';
 

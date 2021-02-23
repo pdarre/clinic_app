@@ -1,6 +1,6 @@
-import 'package:clinic_app/models/users_model.dart';
-import 'package:clinic_app/utils/date_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:clinic_app/models/users_model.dart';
+import 'package:clinic_app/core/helpers/date_helper.dart';
 
 class PatientBasicData extends StatelessWidget {
   final MyUser patient;

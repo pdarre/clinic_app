@@ -1,14 +1,14 @@
+import 'package:clinic_app/providers/providers_access/providers.dart';
+import 'package:flutter/material.dart';
+import 'package:clinic_app/core/common_states_widgets/app_common_background.dart';
+import 'package:clinic_app/core/common_states_widgets/build_error.dart';
+import 'package:clinic_app/core/common_states_widgets/build_loading.dart';
+import 'package:clinic_app/core/common_states_widgets/common_app_bar.dart';
+import 'package:clinic_app/providers/services/bed_services.dart';
+import 'package:clinic_app/providers/services/user_services.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:clinic_app/models/beds_model.dart';
 import 'package:clinic_app/models/rooms_model.dart';
-import 'package:clinic_app/pages/common_states_widgets/app_common_background.dart';
-import 'package:clinic_app/pages/common_states_widgets/build_error.dart';
-import 'package:clinic_app/pages/common_states_widgets/build_loading.dart';
-import 'package:clinic_app/pages/common_states_widgets/common_app_bar.dart';
-import 'package:clinic_app/providers.dart';
-import 'package:clinic_app/services/bed_services.dart';
-import 'package:clinic_app/services/user_services.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RoomDetailPage extends StatelessWidget {
@@ -19,7 +19,7 @@ class RoomDetailPage extends StatelessWidget {
       appBar: CommonAppBar(room.idRoom),
       body: Stack(
         children: [
-          AppCommonBackground(),
+          const AppCommonBackground(),
           Column(
             children: [
               Row(
@@ -57,19 +57,20 @@ class RoomDetailPage extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(height: 20),
               Expanded(
                 child: Container(
-                  child: ListView.builder(
-                    itemExtent: 80,
-                    physics: BouncingScrollPhysics(),
-                    itemCount: room.beds.length,
-                    itemBuilder: (context, index) {
-                      return room.beds[index].isNotEmpty
-                          ? BedTile(idBed: room.beds[index])
-                          : Text('no bed');
-                    },
-                  ),
-                ),
+                    child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
+                      childAspectRatio: 3 / 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10),
+                  itemCount: room.beds.length,
+                  itemBuilder: (context, index) {
+                    return BedTile(idBed: room.beds[index]);
+                  },
+                )),
               ),
             ],
           ),
@@ -110,54 +111,59 @@ class BedCard extends ConsumerWidget {
       ),
       color: Colors.blueGrey[12],
       elevation: 1,
-      child: ListTile(
-        onTap: () async {
-          if (!bed.available) {
-            await watch(authRepository)
-                .findUserById(bed.idPatient)
-                .then((value) {
-              Navigator.of(context)
-                  .pushNamed('/patient-detail-page', arguments: value);
-            });
-          }
-        },
-        title: (bed.available)
-            ? Text(
-                bed.idBed,
-                style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold),
-              )
-            : Text(bed.idBed, style: TextStyle(color: Colors.red)),
-        subtitle: (bed.available)
-            ? Text(
-                'Available',
-                style: TextStyle(color: Colors.green, fontSize: 11),
-              )
-            : Consumer(
-                builder: (_, watch, __) {
-                  var myUserFuture =
-                      watch(getUserByIdFutureProvider(bed.idPatient));
-                  myUserFuture.when(
-                    loading: () => CircularProgressIndicator(),
-                    error: (error, stack) => Text('Ups..'),
-                    data: (myUser) =>
-                        Text('${myUser.firstName} ${myUser.lastName}'),
-                  );
-                  return Container();
-                },
-              ),
-        trailing: Container(
-          width: 80,
-          child: Row(
-            children: [
-              Image.asset('assets/images/hospital_bed1.jpeg'),
-              (bed.available) ? Text('') : Icon(Icons.chevron_right_outlined),
-            ],
+      child: Column(
+        children: [
+          SizedBox(height: 10),
+          (bed.available)
+              ? Text(bed.idBed,
+                  style: TextStyle(
+                      color: Colors.green,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold))
+              : Text(bed.idBed, style: TextStyle(color: Colors.red)),
+          SizedBox(height: 10),
+          Container(
+            width: 40,
+            child: Image.asset(
+              'assets/images/hospital_bed.jpeg',
+              fit: BoxFit.fitHeight,
+            ),
           ),
-        ),
+          SizedBox(height: 10),
+          (bed.available)
+              ? Text(
+                  'Available',
+                  style: TextStyle(color: Colors.green, fontSize: 11),
+                )
+              : PatientData(idPatient: bed.idPatient),
+        ],
       ),
+    );
+  }
+}
+
+class PatientData extends ConsumerWidget {
+  final String idPatient;
+  const PatientData({this.idPatient});
+  @override
+  Widget build(BuildContext context, watch) {
+    var myUserFuture = watch(getUserByIdFutureProvider(idPatient));
+    return myUserFuture.when(
+      loading: () => Container(
+          height: 10, child: CircularProgressIndicator(strokeWidth: 0.5)),
+      error: (error, stack) => Text('Ups..'),
+      data: (myUser) {
+        return InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, '/patient-detail-page',
+                arguments: myUser);
+          },
+          child: Text(
+            'Occupied by ${myUser.firstName} ${myUser.lastName}',
+            style: TextStyle(fontSize: 10),
+          ),
+        );
+      },
     );
   }
 }

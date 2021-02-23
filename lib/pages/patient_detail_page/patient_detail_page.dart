@@ -1,8 +1,7 @@
-import 'package:clinic_app/models/users_model.dart';
-import 'package:clinic_app/pages/common_states_widgets/common_app_bar.dart';
-import 'package:clinic_app/pages/patient_detail_page/patient_detail_widgets/patient_detail_assigned_room.dart';
+import 'package:clinic_app/core/common_states_widgets/common_app_bar.dart';
 import 'package:flutter/material.dart';
-
+import 'package:clinic_app/models/users_model.dart';
+import 'package:clinic_app/pages/patient_detail_page/patient_detail_widgets/patient_detail_assigned_room.dart';
 import 'patient_detail_widgets/patient_detail_Header.dart';
 import 'patient_detail_widgets/patient_detail_assigned_medicines.dart';
 import 'patient_detail_widgets/patient_detail_basic_data.dart';

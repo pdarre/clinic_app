@@ -49,8 +49,15 @@ class BedRepository implements BedRepositoryInterfase {
   }
 
   @override
-  Future<Bed> getBedByIdRoom(String idBed) {
-    // TODO: implement getBedByIdRoom
-    throw UnimplementedError();
+  Future<Bed> getBedByIdRoom(String idBed) async {
+    try {
+      QuerySnapshot query =
+          await db.collection('beds').where('idBed', isEqualTo: idBed).get();
+      return query.docs.map((e) => Bed.fromJson(e.data())).first;
+    } on FirebaseException catch (fireException) {
+      throw Exception(fireException.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }
