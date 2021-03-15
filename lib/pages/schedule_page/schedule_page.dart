@@ -25,7 +25,7 @@ class _SchedulePageState extends State<SchedulePage>
   @override
   void initState() {
     _calendarController = CalendarController();
-    _selectedEvents = List<Appointment>();
+    _selectedEvents = [];
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
@@ -63,7 +63,7 @@ class _SchedulePageState extends State<SchedulePage>
 
   void _onCalendarCreated(
       DateTime first, DateTime last, CalendarFormat format) {
-    _selectedEvents = List<Appointment>();
+    _selectedEvents = [];
   }
 
   @override
