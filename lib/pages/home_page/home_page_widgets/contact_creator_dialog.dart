@@ -60,7 +60,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                 style: TextStyle(fontSize: 14),
                 textAlign: TextAlign.center,
               ),
-              FlatButton(
+              TextButton(
                 child: Text('pdarre@gmail.com'),
                 onPressed: () {
                   launch("mailto:pdarre@gmail.com");
@@ -75,7 +75,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: FlatButton(
+                child: TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },

@@ -45,7 +45,12 @@ class BuildAsignedMedicinesBody extends StatelessWidget {
           ),
         ),
         SizedBox(height: 10),
-        BuildMedicinesAsignedToPatient(medicinesList),
+        medicinesList.length != 0
+            ? BuildMedicinesAsignedToPatient(medicinesList)
+            : Container(
+                padding: EdgeInsets.all(20),
+                child: const Text('No assigned medicines'),
+              )
       ],
     );
   }

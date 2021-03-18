@@ -25,8 +25,6 @@ class AppointmentNotifierProvider extends StateNotifier<AppointmentState> {
   }
 
   Future<void> updateAppointment(Appointment appointment) async {
-//probar si se puede usar appointment desde el state q esta ya cargado, quizas haciendo una copia de state??
-//investigar si funciona la nueva copia de appointment en el estado con copyWith
     try {
       state = AppointmentLoading();
       await _appointmentRepository.updateAppointment(appointment);

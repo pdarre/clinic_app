@@ -40,6 +40,7 @@ class BedRepository implements BedRepositoryInterfase {
           .collection('beds')
           .where('idPatient', isEqualTo: idPatient)
           .get();
+      if (query.size == 0) return null;
       return query.docs.map((e) => Bed.fromJson(e.data())).first;
     } on FirebaseException catch (fireException) {
       throw Exception(fireException.message);

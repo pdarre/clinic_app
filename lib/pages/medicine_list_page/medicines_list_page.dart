@@ -1,11 +1,12 @@
-import 'package:clinic_app/core/common_states_widgets/app_common_background.dart';
-import 'package:clinic_app/core/common_states_widgets/build_error.dart';
-import 'package:clinic_app/core/common_states_widgets/build_loading.dart';
-import 'package:clinic_app/core/common_states_widgets/common_app_bar.dart';
-import 'package:clinic_app/models/medicine_model.dart';
-import 'package:clinic_app/providers/services/medicine_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../core/common_states_widgets/app_common_background.dart';
+import '../../core/common_states_widgets/build_error.dart';
+import '../../core/common_states_widgets/build_loading.dart';
+import '../../core/common_states_widgets/common_app_bar.dart';
+import '../../models/medicine_model.dart';
+import '../../providers/services/medicine_services.dart';
 
 class MedicinesListPage extends StatelessWidget {
   @override

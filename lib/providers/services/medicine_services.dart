@@ -1,12 +1,13 @@
-import 'package:clinic_app/models/medicine_model.dart';
-import 'package:clinic_app/providers/providers_access/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
+
+import '../../models/medicine_model.dart';
+import '../providers_access/providers.dart';
 
 final getMedicineListStringByIdPatientIdFutureProvider = FutureProvider
     .autoDispose
     .family<List<Medicine>, String>((ref, idPatient) async {
-  var medicineList = List<Medicine>();
+  List<Medicine> medicineList = [];
   await ref
       .watch(medicineRepository)
       .getMedicineListByIdPatient(idPatient)

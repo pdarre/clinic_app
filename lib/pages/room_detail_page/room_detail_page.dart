@@ -1,15 +1,15 @@
-import 'package:clinic_app/providers/providers_access/providers.dart';
-import 'package:flutter/material.dart';
-import 'package:clinic_app/core/common_states_widgets/app_common_background.dart';
-import 'package:clinic_app/core/common_states_widgets/build_error.dart';
-import 'package:clinic_app/core/common_states_widgets/build_loading.dart';
-import 'package:clinic_app/core/common_states_widgets/common_app_bar.dart';
-import 'package:clinic_app/providers/services/bed_services.dart';
-import 'package:clinic_app/providers/services/user_services.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:clinic_app/models/beds_model.dart';
-import 'package:clinic_app/models/rooms_model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../core/common_states_widgets/app_common_background.dart';
+import '../../core/common_states_widgets/build_error.dart';
+import '../../core/common_states_widgets/build_loading.dart';
+import '../../core/common_states_widgets/common_app_bar.dart';
+import '../../models/beds_model.dart';
+import '../../models/rooms_model.dart';
+import '../../providers/services/bed_services.dart';
+import '../../providers/services/user_services.dart';
 
 class RoomDetailPage extends StatelessWidget {
   @override

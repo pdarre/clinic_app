@@ -219,11 +219,11 @@ class Alert extends StatelessWidget {
       title: Text("Confirm action"),
       content: Text("Close this consult?"),
       actions: [
-        FlatButton(
+        ElevatedButton(
           child: Text("Cancel"),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        FlatButton(
+        ElevatedButton(
           child: Text("Continue"),
           onPressed: () async {
             await context

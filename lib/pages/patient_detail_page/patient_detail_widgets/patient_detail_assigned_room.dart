@@ -60,18 +60,22 @@ class AssignedRoomError extends StatelessWidget {
 
 class BuildRoomAndBedCard extends StatelessWidget {
   final Bed bed;
-
   const BuildRoomAndBedCard(this.bed);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      height: 150,
-      child: ListTile(
-        title: Text('${bed.idRoom}'),
-        subtitle: Text('${bed.idBed}'),
-      ),
-    );
+    return bed != null
+        ? Container(
+            width: 300,
+            height: 150,
+            child: ListTile(
+              title: Text('${bed.idRoom}'),
+              subtitle: Text('${bed.idBed}'),
+            ),
+          )
+        : Container(
+            padding: EdgeInsets.all(20),
+            child: const Text('No room assigned'),
+          );
   }
 }

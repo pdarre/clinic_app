@@ -1,11 +1,12 @@
-import 'package:clinic_app/core/common_states_widgets/build_error.dart';
-import 'package:clinic_app/core/common_states_widgets/build_initial.dart';
-import 'package:clinic_app/core/common_states_widgets/build_loading.dart';
-import 'package:clinic_app/providers/appointment_provider/appointments_states.dart';
-import 'package:clinic_app/providers/providers_access/providers.dart';
-import 'package:clinic_app/providers/services/user_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../core/common_states_widgets/build_error.dart';
+import '../../core/common_states_widgets/build_initial.dart';
+import '../../core/common_states_widgets/build_loading.dart';
+import '../../providers/appointment_provider/appointments_states.dart';
+import '../../providers/providers_access/providers.dart';
+import '../../providers/services/user_services.dart';
 import 'appointments_detail_widget/appointment_detail_body.dart';
 import 'appointments_detail_widget/appointment_header.dart';
 
@@ -28,8 +29,10 @@ class AppointmentDetail extends ConsumerWidget {
 
 class BuildLoaded extends StatelessWidget {
   final String idPatient;
-
-  const BuildLoaded({Key key, @required this.idPatient}) : super(key: key);
+  const BuildLoaded({
+    Key key,
+    @required this.idPatient,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +49,9 @@ class BuildLoaded extends StatelessWidget {
 
 class AppointmentDetailHeader extends ConsumerWidget {
   final String idPatient;
-
-  const AppointmentDetailHeader({this.idPatient});
+  const AppointmentDetailHeader({
+    this.idPatient,
+  });
 
   @override
   Widget build(BuildContext context, watch) {

@@ -88,7 +88,7 @@ class MedicineCard extends StatelessWidget {
     return Column(
       children: [
         Stack(
-          overflow: Overflow.visible,
+          clipBehavior: Clip.hardEdge,
           children: <Widget>[
             Container(
               height: mySize.height * 0.40,

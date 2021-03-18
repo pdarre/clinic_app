@@ -283,17 +283,20 @@ class _SchedulePageState extends State<SchedulePage>
   }
 }
 
-class BuildAppointmentDetail extends StatelessWidget {
+class BuildAppointmentDetail extends ConsumerWidget {
   final MyUser myUser;
   final Appointment appointment;
   const BuildAppointmentDetail(this.myUser, this.appointment);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, watch) {
     String hora = formatDate(appointment.date, [HH, ':', nn]);
     return Stack(
       children: [
         ListTile(
           onTap: () {
+            context
+                .read(appointmentsProvider)
+                .getAppointmentById(appointment.idAppointment);
             Navigator.of(context).pushNamed('/appointment-detail',
                 arguments: appointment.idAppointment);
           },

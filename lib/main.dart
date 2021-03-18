@@ -14,6 +14,8 @@ import 'pages/lost_connection_page/lost_connection_page.dart';
 import 'providers/providers_access/providers.dart';
 import 'providers/theme_provider/themes_provider.dart';
 
+// import 'package:flutter/scheduler.dart' show timeDilation
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -30,24 +32,32 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, watch) {
     final isDarkFromPreferences = watch(retrieveThemeFromPreferences);
     context.read(themeProvider).getThemeFromPreferences();
-    return ConnectivityBuilder(
-      builder: (context, isConnected, status) {
-        if (isConnected != null && isConnected) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: isDarkFromPreferences.when(
-              loading: () => const BuildLoading(),
-              error: (error, stack) => BuildError(message: error),
-              data: (isDark) => BuildInitialPage(isDark: isDark),
-            ),
-          );
-        } else {
-          return MaterialApp(
-            home: LostConnectionPage(),
-          );
-        }
-      },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: isDarkFromPreferences.when(
+        loading: () => const BuildLoading(),
+        error: (error, stack) => BuildError(message: error),
+        data: (isDark) => BuildInitialPage(isDark: isDark),
+      ),
     );
+    // return ConnectivityBuilder(
+    //   builder: (context, isConnected, status) {
+    //     if (status != null && isConnected != null && isConnected) {
+    //       return MaterialApp(
+    //         debugShowCheckedModeBanner: false,
+    //         home: isDarkFromPreferences.when(
+    //           loading: () => const BuildLoading(),
+    //           error: (error, stack) => BuildError(message: error),
+    //           data: (isDark) => BuildInitialPage(isDark: isDark),
+    //         ),
+    //       );
+    //     } else {
+    //       return MaterialApp(
+    //         home: LostConnectionPage(),
+    //       );
+    //     }
+    //   },
+    // );
   }
 }
 

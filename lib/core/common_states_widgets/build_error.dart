@@ -24,9 +24,9 @@ class BuildError extends StatelessWidget {
                 SizedBox(height: 10),
                 Text(message),
                 SizedBox(height: 10),
-                RaisedButton(
-                  child: Text('Go back'),
+                ElevatedButton(
                   onPressed: () => Navigator.of(context).pop(),
+                  child: Text('Go back'),
                 ),
               ],
             ),

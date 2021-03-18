@@ -53,14 +53,14 @@ class LoginBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               LoginHeader(),
-              RaisedButton(
+              ElevatedButton(
                 child: Text('Kevin SignIn'),
                 onPressed: () {
                   myLogin(context, 'kevindawson@mail.com', '123456');
                 },
               ),
               SizedBox(height: 20),
-              RaisedButton(
+              ElevatedButton(
                 child: Text('Mota SignIn'),
                 onPressed: () {
                   myLogin(context, 'waltergargano@mail.com', '123456');
