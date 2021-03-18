@@ -1,16 +1,7 @@
-# clinic_app
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![](https://res.cloudinary.com/fluttercarbonero/image/upload/v1607364350/clinic_app/app%20screenshots/Screenshot_1607363793_cbbkol.png)
+![](https://res.cloudinary.com/fluttercarbonero/image/upload/v1607364351/clinic_app/app%20screenshots/Screenshot_1607363847_ugp3ro.png)
+![](https://res.cloudinary.com/fluttercarbonero/image/upload/v1607364351/clinic_app/app%20screenshots/Screenshot_1607363854_na1cw3.png)
+![](https://res.cloudinary.com/fluttercarbonero/image/upload/v1607364350/clinic_app/app%20screenshots/Screenshot_1607363840_upaifm.png)
+![](https://res.cloudinary.com/fluttercarbonero/image/upload/v1607364350/clinic_app/app%20screenshots/Screenshot_1607363824_lrsfff.png)
+![](https://res.cloudinary.com/fluttercarbonero/image/upload/v1607364349/clinic_app/app%20screenshots/Screenshot_1607363800_vcivfd.png)
+![](https://res.cloudinary.com/fluttercarbonero/image/upload/v1607364349/clinic_app/app%20screenshots/Screenshot_1607363805_o0qvq2.png
